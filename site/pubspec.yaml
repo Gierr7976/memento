@@ -30,7 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^0.22.0
   memento_style:
-    path: ../memento_style
+    path: ../style
   google_fonts: ^2.1.0
 
 dev_dependencies:
