@@ -1,0 +1,23 @@
+name: memento_ui
+
+description: An UI kit for Memento
+
+version: 0.1.0
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.4.0"
+  
+dependencies:
+  flutter:
+    sdk: flutter
+    
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+    
+flutter:
+  fonts:
+      - family:  TablerIcons
+        fonts:
+         - asset: fonts/TablerIcons.ttf
