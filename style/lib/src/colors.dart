@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 abstract class MementoColors {
-
   static const Color light0 = Color(0xffFFFFFF);
-  static const Color light1 = Color(0xffFCFAF5);
+  static const Color light1 = Color(0xfffcfaf5);
   static const Color light2 = Color(0xffF0EEE9);
   static const Color light3 = Color(0xffE2E0DC);
   static const Color light4 = Color(0xffBFBDB9);
@@ -27,8 +26,8 @@ abstract class MementoColors {
   static const Color orange4 = Color(0xffFFECB3);
 
   static const Color yellow0 = Color(0xffF9A825);
-  static const Color yellow1 = Color(0xffFDD835);
-  static const Color yellow2 = Color(0xffFAE635);
+  static const Color yellow1 = Color(0xfffdd835);
+  static const Color yellow2 = Color(0xfffae635);
   static const Color yellow3 = Color(0xffFEF075);
   static const Color yellow4 = Color(0xffFFF9C4);
 
