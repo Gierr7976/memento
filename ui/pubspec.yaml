@@ -11,6 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  memento_style:
+    path: ../style
+  provider: ^5.0.0
     
 dev_dependencies:
   flutter_test:

@@ -80,12 +80,12 @@ class MementoText {
   );
 
   static final TextStyle mediumLabel = GoogleFonts.jost(
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: FontWeight.w500,
   );
 
   static final TextStyle smallLabel = GoogleFonts.jost(
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: FontWeight.w500,
   );
 }

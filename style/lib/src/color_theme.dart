@@ -5,7 +5,7 @@ import 'colors.dart';
 
 abstract class MementoColorTheme {
 
-  MementoColorTheme of(BuildContext context) => context.watch();
+  static MementoColorTheme of(BuildContext context) => context.watch();
 
   Color get background;
 
