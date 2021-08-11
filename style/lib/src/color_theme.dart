@@ -1,8 +1,12 @@
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 import 'colors.dart';
 
 abstract class MementoColorTheme {
+
+  MementoColorTheme of(BuildContext context) => context.watch();
+
   Color get background;
 
   Color get text;
