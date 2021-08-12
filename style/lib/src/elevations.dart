@@ -6,7 +6,8 @@ abstract class MementoElevations {
     BoxShadow(
       color: MementoColors.dark2.withOpacity(0.32),
       offset: Offset(0, 0.5),
-      blurRadius: -4,
+      blurRadius: 4,
+      spreadRadius: -4,
     )
   ];
 

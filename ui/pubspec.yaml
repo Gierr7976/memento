@@ -15,6 +15,7 @@ dependencies:
   memento_style:
     path: ../style
   provider: ^5.0.0
+  simple_gesture_detector: ^0.2.0
     
 dev_dependencies:
   flutter_test:

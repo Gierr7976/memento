@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:memento_style/memento_style.dart';
+import 'package:memento_ui/src/misc/constants.dart';
 
 @immutable
 class Clickable extends StatelessWidget {
-  static final radius = BorderRadius.circular(16);
-
   final Widget child;
   final bool flat;
   final Color? color;
@@ -26,7 +25,7 @@ class Clickable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 300),
+      duration: SMALL_ANIMATION_DURATION,
       constraints: constraints ?? BoxConstraints(minHeight: 48),
       decoration: BoxDecoration(
         color: enabled
@@ -35,13 +34,13 @@ class Clickable extends StatelessWidget {
                     ? MementoColorTheme.of(context).background
                     : MementoColorTheme.of(context).primary)
             : MementoColorTheme.of(context).background,
-        borderRadius: radius,
+        borderRadius: GENERIC_BORDER_RADIUS,
         boxShadow: flat || !enabled ? null : MementoElevations.e2,
       ),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          borderRadius: radius,
+          borderRadius: GENERIC_BORDER_RADIUS,
           child: child,
           onTap: enabled ? onTap : null,
         ),

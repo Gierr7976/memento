@@ -6,26 +6,25 @@ import 'package:memento_ui/src/targets/circle_toggle.dart';
 
 import 'preset.dart';
 
-void main(){
+void main() {
   TestPreset(child: CircleButtonTest()).run();
 }
 
-class CircleButtonTest extends StatelessWidget{
+class CircleButtonTest extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.spaceAround,
-    children: [
-      MementoCircleButton(
-        icon: TablerIcons.check,
-        onTap: (){},
-      ),
-      MementoCircleToggle(
-        icon: TablerIcons.check,
-        onColor: MementoColorTheme.of(context).strongOk,
-        onBackgroundColor: MementoColorTheme.of(context).dimmedOk,
-        onToggle: (toggle) => print(toggle),
-      )
-    ],
-  );
-
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          MementoCircleButton(
+            icon: TablerIcons.check,
+            onTap: () {},
+          ),
+          MementoCircleToggle(
+            icon: TablerIcons.check,
+            onColor: MementoColorTheme.of(context).strongOk,
+            onBackgroundColor: MementoColorTheme.of(context).dimmedOk,
+            onToggle: (toggle) => print(toggle),
+          )
+        ],
+      );
 }

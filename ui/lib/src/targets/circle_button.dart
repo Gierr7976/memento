@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:memento_style/memento_style.dart';
+import 'package:memento_ui/src/misc/constants.dart';
 
 class MementoCircleButton extends StatelessWidget {
   final IconData icon;
@@ -21,7 +22,7 @@ class MementoCircleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => AnimatedContainer(
-        duration: Duration(milliseconds: 300),
+        duration: SMALL_ANIMATION_DURATION,
         width: 48,
         height: 48,
         decoration: BoxDecoration(
@@ -34,7 +35,7 @@ class MementoCircleButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(24),
             child: Center(
                 child: AnimatedSwitcher(
-              duration: Duration(milliseconds: 300),
+              duration: SMALL_ANIMATION_DURATION,
               child: Icon(
                 icon,
                 key: UniqueKey(),
