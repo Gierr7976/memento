@@ -25,8 +25,9 @@ class Clickable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: constraints ?? BoxConstraints.tightFor(height: 48),
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 300),
+      constraints: constraints ?? BoxConstraints(minHeight: 48),
       decoration: BoxDecoration(
         color: enabled
             ? color ??

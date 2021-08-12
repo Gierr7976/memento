@@ -13,6 +13,8 @@ abstract class MementoColorTheme {
 
   Color get semiDimmedText;
 
+  Color get almostDimmedText;
+
   Color get dimmedText;
 
   Color get primary;
@@ -43,6 +45,9 @@ class BrightTheme extends MementoColorTheme {
 
   @override
   Color get semiDimmedText => MementoColors.dark2;
+
+  @override
+  Color get almostDimmedText => MementoColors.dark3;
 
   @override
   Color get dimmedText => MementoColors.dark4;
