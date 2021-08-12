@@ -11,6 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_bloc: ^7.1.0
   memento_style:
     path: ../style
   provider: ^5.0.0
