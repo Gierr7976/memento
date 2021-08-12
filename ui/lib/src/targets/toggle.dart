@@ -1,6 +1,9 @@
+library memento_ui;
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:memento_style/memento_style.dart';
+import 'package:memento_ui/src/logic/toggle.dart';
 import 'package:memento_ui/src/misc/clickable.dart';
 import 'package:memento_ui/src/tabler_icons.dart';
 
@@ -21,9 +24,9 @@ class MementoToggle extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext _) => BlocProvider<_ToggleCubit>(
-        create: (__) => _ToggleCubit(initialState),
-        child: BlocBuilder<_ToggleCubit, bool>(
+  Widget build(BuildContext _) => BlocProvider<ToggleCubit>(
+        create: (__) => ToggleCubit(initialState),
+        child: BlocBuilder<ToggleCubit, bool>(
           builder: (context, state) => Clickable(
             child: Padding(
               padding: EdgeInsets.only(left: 16, top: 8, right: 16, bottom: 8),
@@ -76,7 +79,10 @@ class MementoToggle extends StatelessWidget {
             color: state && enabled
                 ? MementoColorTheme.of(context).dimmedOk
                 : null,
-            onTap: () => context.read<_ToggleCubit>().tap(),
+            onTap: () {
+              onToggle?.call(!state);
+              context.read<ToggleCubit>().toggle();
+            },
           ),
         ),
       );
@@ -92,10 +98,4 @@ class MementoToggle extends StatelessWidget {
         ),
         softWrap: true,
       );
-}
-
-class _ToggleCubit extends Cubit<bool> {
-  _ToggleCubit(bool initialState) : super(initialState);
-
-  void tap() => emit(!state);
 }

@@ -105,8 +105,7 @@ class MementoButton extends StatelessWidget {
 
   Widget _text(BuildContext context) => Text(
         text!,
-        style: MementoText.mediumLabel
-            .copyWith(color: _contentColor(context)),
+        style: MementoText.mediumLabel.copyWith(color: _contentColor(context)),
         textAlign: TextAlign.center,
       );
 }
