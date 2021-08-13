@@ -40,50 +40,56 @@ class MementoButton extends StatelessWidget {
         constraints: constraints,
         enabled: enabled,
         color: backgroundColor,
-        child: Padding(
-          padding: EdgeInsets.only(
-            left: 16,
-            top: 5,
-            right: 16,
-            bottom: 11,
-          ),
-          child: Row(
-            mainAxisAlignment: _rowAlignment(),
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: _buildContent(context),
-          ),
+        child: _body(context),
+      );
+
+  Padding _body(BuildContext context) => Padding(
+        padding: EdgeInsets.only(
+          left: 16,
+          top: 5,
+          right: 16,
+          bottom: 11,
+        ),
+        child: Row(
+          mainAxisAlignment: _rowAlignment(),
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: _content(context),
         ),
       );
 
-  List<Widget> _buildContent(BuildContext context) {
+  List<Widget> _content(BuildContext context) {
     List<Widget> content = [
-      if (icon != null)
-        Padding(
-          padding: EdgeInsets.only(right: 16),
-          child: Icon(
-            icon,
-            size: 32,
-            color: _contentColor(context),
-          ),
-        ),
-      if (text != null)
-        alignment == ButtonAlignment.center
-            ? _text(context)
-            : Expanded(child: _text(context)),
-      if (icon != null && text != null)
-        Padding(
-          padding: EdgeInsets.only(left: 16),
-          child: Container(
-            width: 32,
-            height: 32,
-          ),
-        ),
+      if (icon != null) _icon(context),
+      if (text != null) _alignedText(context),
+      if (icon != null && text != null) _counterIndent(),
     ];
     return alignment == ButtonAlignment.right
         ? content.reversed.toList()
         : content;
   }
+
+  Padding _counterIndent() => Padding(
+        padding: EdgeInsets.only(left: 16),
+        child: Container(
+          width: 32,
+          height: 32,
+        ),
+      );
+
+  Widget _alignedText(BuildContext context) =>
+      alignment == ButtonAlignment.center
+          ? _text(context)
+          : Expanded(child: _text(context));
+
+  Padding _icon(BuildContext context) => Padding(
+        padding: EdgeInsets.only(right: 16),
+        child: Icon(
+          icon,
+          size: 32,
+          color: _contentColor(context),
+        ),
+      );
 
   Color _contentColor(BuildContext context) => enabled
       ? color ??
