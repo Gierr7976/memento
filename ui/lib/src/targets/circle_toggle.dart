@@ -32,19 +32,30 @@ class MementoCircleToggle extends StatelessWidget {
   Widget build(BuildContext _) => BlocProvider<ToggleCubit>(
         create: (__) => ToggleCubit(initialState),
         child: BlocBuilder<ToggleCubit, bool>(
-          builder: (context, state) => MementoCircleButton(
-            icon: icon,
-            color: state
-                ? onColor ?? MementoColorTheme.of(context).primary
-                : offColor,
-            backgroundColor: state ? onBackgroundColor : offBackgroundColor,
-            enabled: enabled,
-            small: small,
-            onTap: () {
-              onToggle?.call(!state);
-              context.read<ToggleCubit>().toggle();
-            },
-          ),
+          builder: (context, state) => _button(state, context),
         ),
       );
+
+  MementoCircleButton _button(bool state, BuildContext context) {
+    return MementoCircleButton(
+      icon: icon,
+      color: _iconColor(state, context),
+      backgroundColor: _backgroundColor(state),
+      enabled: enabled,
+      small: small,
+      onTap: () => _onTap(state, context),
+    );
+  }
+
+  void _onTap(bool state, BuildContext context) {
+    onToggle?.call(!state);
+    context.read<ToggleCubit>().toggle();
+  }
+
+  Color? _backgroundColor(bool state) =>
+      state ? onBackgroundColor : offBackgroundColor;
+
+  Color? _iconColor(bool state, BuildContext context) {
+    return state ? onColor ?? MementoColorTheme.of(context).primary : offColor;
+  }
 }
