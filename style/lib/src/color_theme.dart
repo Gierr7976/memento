@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'colors.dart';
 
 abstract class MementoColorTheme {
-
   static MementoColorTheme of(BuildContext context) => context.watch();
 
   Color get background;
@@ -80,4 +79,11 @@ class BrightTheme extends MementoColorTheme {
 
   @override
   Color get warning => MementoColors.yellow2;
+}
+
+mixin MementoColorThemeUserMixin {
+
+  MementoColorTheme colorTheme(BuildContext context) =>
+      MementoColorTheme.of(context);
+
 }
