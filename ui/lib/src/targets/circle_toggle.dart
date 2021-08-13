@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:memento_style/memento_style.dart';
 import 'package:memento_ui/src/logic/toggle.dart';
+import 'package:memento_ui/src/misc/toggleable.dart';
 import 'package:memento_ui/src/targets/circle_button.dart';
 
-class MementoCircleToggle extends StatelessWidget {
-  final bool initialState;
+class MementoCircleToggle extends Toggleable {
   final IconData icon;
   final bool small;
   final bool enabled;
@@ -13,11 +13,11 @@ class MementoCircleToggle extends StatelessWidget {
   final Color? onBackgroundColor;
   final Color? offColor;
   final Color? offBackgroundColor;
-  final void Function(bool)? onToggle;
 
-  const MementoCircleToggle({
+  MementoCircleToggle({
     Key? key,
-    this.initialState = true,
+    bool initialState = true,
+    OnToggleCallback? onToggle,
     required this.icon,
     this.small = true,
     this.enabled = true,
@@ -25,16 +25,14 @@ class MementoCircleToggle extends StatelessWidget {
     this.onBackgroundColor,
     this.offColor,
     this.offBackgroundColor,
-    this.onToggle,
-  }) : super(key: key);
+  }) : super(
+          key: key,
+          initialState: initialState,
+          onToggle: onToggle,
+        );
 
   @override
-  Widget build(BuildContext _) => BlocProvider<ToggleCubit>(
-        create: (__) => ToggleCubit(initialState),
-        child: BlocBuilder<ToggleCubit, bool>(
-          builder: (context, state) => _button(state, context),
-        ),
-      );
+  Widget builder(BuildContext context, bool state) => _button(state, context);
 
   MementoCircleButton _button(bool state, BuildContext context) {
     return MementoCircleButton(
@@ -43,13 +41,8 @@ class MementoCircleToggle extends StatelessWidget {
       backgroundColor: _backgroundColor(state),
       enabled: enabled,
       small: small,
-      onTap: () => _onTap(state, context),
+      onTap: () => tap(state, context),
     );
-  }
-
-  void _onTap(bool state, BuildContext context) {
-    onToggle?.call(!state);
-    context.read<ToggleCubit>().toggle();
   }
 
   Color? _backgroundColor(bool state) =>

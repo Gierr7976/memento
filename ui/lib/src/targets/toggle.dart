@@ -3,44 +3,37 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:memento_style/memento_style.dart';
 import 'package:memento_ui/src/logic/toggle.dart';
 import 'package:memento_ui/src/misc/clickable.dart';
+import 'package:memento_ui/src/misc/toggleable.dart';
 import 'package:memento_ui/src/tabler_icons.dart';
 
-class MementoToggle extends StatelessWidget {
+class MementoToggle extends Toggleable {
   final String title;
   final String? description;
-  final bool initialState;
-  final void Function(bool)? onToggle;
   final bool enabled;
 
   MementoToggle({
     Key? key,
     required this.title,
     this.description,
-    this.initialState = false,
-    this.onToggle,
+    bool initialState = false,
+    OnToggleCallback? onToggle,
     this.enabled = true,
-  }) : super(key: key);
+  }) : super(
+          key: key,
+          initialState: initialState,
+          onToggle: onToggle,
+        );
 
   @override
-  Widget build(BuildContext _) => BlocProvider<ToggleCubit>(
-        create: (__) => ToggleCubit(initialState),
-        child: BlocBuilder<ToggleCubit, bool>(
-          builder: (context, state) => _ground(context, state),
-        ),
-      );
+  Widget builder(BuildContext context, bool state) => _ground(context, state);
 
   Clickable _ground(BuildContext context, bool state) {
     return Clickable(
       child: _content(context, state),
       enabled: enabled,
       color: state && enabled ? MementoColorTheme.of(context).dimmedOk : null,
-      onTap: () => _onTap(state, context),
+      onTap: () => tap(state, context),
     );
-  }
-
-  void _onTap(bool state, BuildContext context) {
-    onToggle?.call(!state);
-    context.read<ToggleCubit>().toggle();
   }
 
   Padding _content(BuildContext context, bool state) {
