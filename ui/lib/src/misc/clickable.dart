@@ -23,28 +23,37 @@ class Clickable extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: SMALL_ANIMATION_DURATION,
-      constraints: constraints ?? BoxConstraints(minHeight: 48),
-      decoration: BoxDecoration(
-        color: enabled
-            ? color ??
-                (flat
-                    ? MementoColorTheme.of(context).background
-                    : MementoColorTheme.of(context).primary)
-            : MementoColorTheme.of(context).background,
+  Widget build(BuildContext context) => _ground(context);
+
+  Widget _ground(BuildContext context) => AnimatedContainer(
+        duration: SMALL_ANIMATION_DURATION,
+        constraints: constraints ?? BoxConstraints(minHeight: 48),
+        decoration: _groundDecoration(context),
+        child: _touch(context),
+      );
+
+  BoxDecoration _groundDecoration(BuildContext context) => BoxDecoration(
+        color: _groundColor(context),
         borderRadius: GENERIC_BORDER_RADIUS,
-        boxShadow: flat || !enabled ? null : MementoElevations.e2,
-      ),
-      child: Material(
+        boxShadow: _boxShadow(),
+      );
+
+  List<BoxShadow>? _boxShadow() =>
+      flat || !enabled ? null : MementoElevations.e2;
+
+  Widget _touch(BuildContext context) => Material(
         color: Colors.transparent,
         child: InkWell(
           borderRadius: GENERIC_BORDER_RADIUS,
           child: child,
           onTap: enabled ? onTap : null,
         ),
-      ),
-    );
-  }
+      );
+
+  Color _groundColor(BuildContext context) => enabled
+      ? color ??
+          (flat
+              ? MementoColorTheme.of(context).background
+              : MementoColorTheme.of(context).primary)
+      : MementoColorTheme.of(context).background;
 }
