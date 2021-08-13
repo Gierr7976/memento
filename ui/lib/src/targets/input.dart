@@ -40,107 +40,120 @@ class MementoInput extends StatelessWidget {
           return cubit;
         },
         child: BlocBuilder<InputCubit, InputState>(
-          builder: (context, state) => AnimatedContainer(
-            duration: SMALL_ANIMATION_DURATION,
-            height: 48,
-            decoration: BoxDecoration(
-              borderRadius: GENERIC_BORDER_RADIUS,
-              color: MementoColorTheme.of(context).background,
-              boxShadow: MementoElevations.inset,
-              border: Border.all(color: _color(context, state, true), width: 1),
-            ),
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                borderRadius: GENERIC_BORDER_RADIUS,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 16, right: 16),
-                  child: Stack(
+          builder: (context, state) => _ground(context, state),
+        ),
+      );
+
+  AnimatedContainer _ground(BuildContext context, InputState state) =>
+      AnimatedContainer(
+        duration: SMALL_ANIMATION_DURATION,
+        height: 48,
+        decoration: _groundDecoration(context, state),
+        child: _interactive(state, context),
+      );
+
+  Material _interactive(InputState state, BuildContext context) => Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: GENERIC_BORDER_RADIUS,
+          child: Padding(
+            padding: EdgeInsets.only(left: 16, right: 16),
+            child: Stack(
+              children: [
+                _title(state, context),
+                Padding(
+                  padding: EdgeInsets.only(top: 12, bottom: 12),
+                  child: Row(
                     children: [
-                      Positioned.fill(
-                        child: AnimatedSwitcher(
-                          duration: SMALL_ANIMATION_DURATION,
-                          child: state.data.isNotEmpty
-                              ? Align(
-                                  key: ValueKey(state.data.isNotEmpty),
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    caption,
-                                    style: MementoText.tiny.copyWith(
-                                        color: _color(context, state)),
-                                  ),
-                                )
-                              : Align(
-                                  key: ValueKey(state.data.isNotEmpty),
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    caption,
-                                    style: MementoText.body16.copyWith(
-                                        color: MementoColorTheme.of(context)
-                                            .almostDimmedText),
-                                  ),
-                                ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 12, bottom: 12),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: EditableText(
-                                controller: controller,
-                                style: MementoText.body16.copyWith(
-                                    color: MementoColorTheme.of(context).text),
-                                cursorColor:
-                                    MementoColorTheme.of(context).primary,
-                                backgroundCursorColor:
-                                    MementoColorTheme.of(context)
-                                        .almostDimmedText,
-                                focusNode: focusNode
-                                  ..addListener(() {
-                                    InputCubit cubit = context.read();
-                                    if (focusNode.hasFocus)
-                                      cubit.focus();
-                                    else
-                                      cubit.unfocus();
-                                  }),
-                                onChanged: (text) =>
-                                    context.read<InputCubit>().update(text),
-                              ),
-                            ),
-                            Padding(
-                                padding: EdgeInsets.only(left: 16),
-                                child: AnimatedSwitcher(
-                                  duration: SMALL_ANIMATION_DURATION,
-                                  child: state.valid ||
-                                          state.error ||
-                                          standbyIcon != null
-                                      ? Icon(
-                                          state.valid
-                                              ? validIcon
-                                              : state.error
-                                                  ? errorIcon
-                                                  : standbyIcon,
-                                          key: UniqueKey(),
-                                          size: 24,
-                                          color: _color(context, state),
-                                        )
-                                      : Container(
-                                          width: 24,
-                                          height: 24,
-                                        ),
-                                )),
-                          ],
-                        ),
-                      ),
+                      _inputField(context),
+                      _iconWithIndent(state, context),
                     ],
                   ),
                 ),
-                onTap: () => focusNode.requestFocus(),
-              ),
+              ],
             ),
           ),
+          onTap: () => focusNode.requestFocus(),
         ),
+      );
+
+  Padding _iconWithIndent(InputState state, BuildContext context) => Padding(
+        padding: EdgeInsets.only(left: 16),
+        child: AnimatedSwitcher(
+          duration: SMALL_ANIMATION_DURATION,
+          child: _iconOrPlaceholder(state, context),
+        ),
+      );
+
+  StatelessWidget _iconOrPlaceholder(InputState state, BuildContext context) =>
+      state.valid || state.error || standbyIcon != null
+          ? Icon(
+              _iconType(state),
+              key: UniqueKey(),
+              size: 24,
+              color: _color(context, state),
+            )
+          : Container(
+              width: 24,
+              height: 24,
+            );
+
+  IconData? _iconType(InputState state) => state.valid
+      ? validIcon
+      : state.error
+          ? errorIcon
+          : standbyIcon;
+
+  Expanded _inputField(BuildContext context) => Expanded(
+        child: EditableText(
+          controller: controller,
+          style: MementoText.body16
+              .copyWith(color: MementoColorTheme.of(context).text),
+          cursorColor: MementoColorTheme.of(context).primary,
+          backgroundCursorColor: MementoColorTheme.of(context).almostDimmedText,
+          focusNode: focusNode
+            ..addListener(() {
+              InputCubit cubit = context.read();
+              if (focusNode.hasFocus)
+                cubit.focus();
+              else
+                cubit.unfocus();
+            }),
+          onChanged: (text) => context.read<InputCubit>().update(text),
+        ),
+      );
+
+  Positioned _title(InputState state, BuildContext context) => Positioned.fill(
+        child: AnimatedSwitcher(
+          duration: SMALL_ANIMATION_DURATION,
+          child: state.data.isNotEmpty
+              ? Align(
+                  key: ValueKey(state.data.isNotEmpty),
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    caption,
+                    style: MementoText.tiny
+                        .copyWith(color: _color(context, state)),
+                  ),
+                )
+              : Align(
+                  key: ValueKey(state.data.isNotEmpty),
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    caption,
+                    style: MementoText.body16.copyWith(
+                        color: MementoColorTheme.of(context).almostDimmedText),
+                  ),
+                ),
+        ),
+      );
+
+  BoxDecoration _groundDecoration(BuildContext context, InputState state) =>
+      BoxDecoration(
+        borderRadius: GENERIC_BORDER_RADIUS,
+        color: MementoColorTheme.of(context).background,
+        boxShadow: MementoElevations.inset,
+        border: Border.all(color: _color(context, state, true), width: 1),
       );
 
   Color _color(BuildContext context, InputState state, [bool dim = false]) =>
