@@ -32,16 +32,15 @@ class MementoCircleToggle extends Toggleable {
   @override
   Widget builder(BuildContext context, bool state) => _button(state, context);
 
-  MementoCircleButton _button(bool state, BuildContext context) {
-    return MementoCircleButton(
-      icon: icon,
-      color: _iconColor(state, context),
-      backgroundColor: _backgroundColor(state),
-      enabled: enabled,
-      small: small,
-      onTap: () => tap(state, context),
-    );
-  }
+  MementoCircleButton _button(bool state, BuildContext context) =>
+      MementoCircleButton(
+        icon: icon,
+        color: _iconColor(state, context),
+        backgroundColor: _backgroundColor(state),
+        enabled: enabled,
+        small: small,
+        onTap: () => tap(state, context),
+      );
 
   Color? _backgroundColor(bool state) =>
       state ? onBackgroundColor : offBackgroundColor;
