@@ -21,32 +21,55 @@ class MementoCircleButton extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => AnimatedContainer(
-        duration: SMALL_ANIMATION_DURATION,
-        width: 48,
-        height: 48,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: backgroundColor ?? MementoColorTheme.of(context).background,
+  Widget build(BuildContext context) => _ground(context);
+
+  AnimatedContainer _ground(BuildContext context) {
+    return AnimatedContainer(
+      duration: SMALL_ANIMATION_DURATION,
+      width: 48,
+      height: 48,
+      decoration: _groundDecoration(context),
+      child: _touch(context),
+    );
+  }
+
+  Material _touch(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(24),
+        child: Center(
+          child: _icon(context),
         ),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            borderRadius: BorderRadius.circular(24),
-            child: Center(
-                child: AnimatedSwitcher(
-              duration: SMALL_ANIMATION_DURATION,
-              child: Icon(
-                icon,
-                key: UniqueKey(),
-                size: small ? 24 : 32,
-                color: enabled
-                    ? color ?? MementoColorTheme.of(context).almostDimmedText
-                    : MementoColorTheme.of(context).dimmedText,
-              ),
-            )),
-            onTap: enabled ? onTap : null,
-          ),
-        ),
-      );
+        onTap: enabled ? onTap : null,
+      ),
+    );
+  }
+
+  AnimatedSwitcher _icon(BuildContext context) {
+    return AnimatedSwitcher(
+      duration: SMALL_ANIMATION_DURATION,
+      child: Icon(
+        icon,
+        key: UniqueKey(),
+        size: _iconSize,
+        color: _iconColor(context),
+      ),
+    );
+  }
+
+  double get _iconSize => small ? 24 : 32;
+
+  Color _iconColor(BuildContext context) {
+    return enabled
+        ? color ?? MementoColorTheme.of(context).almostDimmedText
+        : MementoColorTheme.of(context).dimmedText;
+  }
+
+  BoxDecoration _groundDecoration(BuildContext context) {
+    return BoxDecoration(
+      shape: BoxShape.circle,
+      color: backgroundColor ?? MementoColorTheme.of(context).background,
+    );
+  }
 }
