@@ -89,7 +89,7 @@ class MementoStepper extends StatelessWidget {
   StepLabelState _labelState(int index, StepperState state) =>
       index == state.step
           ? StepLabelState.active
-          : index > state.step
+          : index < state.step
               ? steps[index].validator()
                   ? StepLabelState.ok
                   : StepLabelState.error
