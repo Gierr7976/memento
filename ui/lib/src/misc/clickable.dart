@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:memento_style/memento_style.dart';
 import 'package:memento_ui/src/misc/constants.dart';
 
+@deprecated
 @immutable
 class Clickable extends StatelessWidget {
   final Widget child;
