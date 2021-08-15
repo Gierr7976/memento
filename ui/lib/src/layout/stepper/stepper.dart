@@ -6,6 +6,7 @@ import 'package:memento_ui/src/layout/stepper/slider.dart';
 import 'package:memento_ui/src/layout/stepper/step.dart';
 import 'package:memento_ui/src/logic/stepper.dart';
 import 'package:memento_ui/src/misc/constants.dart';
+import 'package:simple_gesture_detector/simple_gesture_detector.dart';
 
 class MementoStepper extends StatelessWidget {
   final List<MementoStep> steps;
@@ -15,15 +16,23 @@ class MementoStepper extends StatelessWidget {
   static StepperCubit of(BuildContext context) => context.read();
 
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext _) => Container(
         constraints: BoxConstraints(minHeight: _minHeight),
         child: BlocProvider(
           create: (_) => StepperCubit(maxStep: steps.length - 1),
-          child: Stack(
-            children: [
-              _body(),
-              _labels(),
-            ],
+          child: Builder(
+            builder: (context) => SimpleGestureDetector(
+              behavior: HitTestBehavior.translucent,
+              child: Stack(
+                children: [
+                  _body(),
+                  _labels(),
+                ],
+              ),
+              onVerticalSwipe: (direction) => direction == SwipeDirection.down
+                  ? MementoStepper.of(context).scrollUp()
+                  : MementoStepper.of(context).scrollDown(),
+            ),
           ),
         ),
       );
