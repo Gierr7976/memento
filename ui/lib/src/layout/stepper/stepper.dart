@@ -10,14 +10,22 @@ import 'package:simple_gesture_detector/simple_gesture_detector.dart';
 
 class MementoStepper extends StatelessWidget {
   final List<MementoStep> steps;
+  final Axis axis;
 
-  const MementoStepper({Key? key, required this.steps}) : super(key: key);
+  const MementoStepper({
+    Key? key,
+    required this.steps,
+    this.axis = Axis.vertical,
+  }) : super(key: key);
 
   static StepperCubit of(BuildContext context) => context.read();
 
   @override
   Widget build(BuildContext _) => Container(
-        constraints: BoxConstraints(minHeight: _minHeight),
+        constraints: BoxConstraints(
+          minWidth: axis == Axis.horizontal ? _minWidth : 0,
+          minHeight: axis == Axis.vertical ? _minHeight : 0,
+        ),
         child: BlocProvider(
           create: (_) => StepperCubit(maxStep: steps.length - 1),
           child: Builder(
@@ -29,15 +37,30 @@ class MementoStepper extends StatelessWidget {
                   _labels(),
                 ],
               ),
-              onVerticalSwipe: (direction) => direction == SwipeDirection.down
-                  ? MementoStepper.of(context).scrollUp()
-                  : MementoStepper.of(context).scrollDown(),
+              onVerticalSwipe: axis == Axis.vertical
+                  ? (direction) => _onVerticalSwipe(direction, context)
+                  : null,
+              onHorizontalSwipe: axis == Axis.horizontal
+                  ? (direction) => _onHorizontalSwipe(direction, context)
+                  : null,
             ),
           ),
         ),
       );
 
+  void _onVerticalSwipe(SwipeDirection direction, BuildContext context) =>
+      direction == SwipeDirection.down
+          ? MementoStepper.of(context).scrollPrev()
+          : MementoStepper.of(context).scrollNext();
+
+  void _onHorizontalSwipe(SwipeDirection direction, BuildContext context) =>
+      direction == SwipeDirection.right
+          ? MementoStepper.of(context).scrollPrev()
+          : MementoStepper.of(context).scrollNext();
+
   double get _minHeight => 16.0 + 32 * steps.length + 200;
+
+  double get _minWidth => 16.0 + 32 * steps.length + 128;
 
   BlocBuilder _labels() => BlocBuilder<StepperCubit, StepperState>(
         builder: (context, state) => LayoutBuilder(
@@ -48,7 +71,9 @@ class MementoStepper extends StatelessWidget {
                   context: context,
                   state: state,
                   index: index,
-                  height: constraints.maxHeight,
+                  axisDimension: axis == Axis.vertical
+                      ? constraints.maxHeight
+                      : constraints.maxWidth,
                 )
             ],
           ),
@@ -58,6 +83,7 @@ class MementoStepper extends StatelessWidget {
   BlocBuilder _body() => BlocBuilder<StepperCubit, StepperState>(
         builder: (context, state) => StepperSlider(
           key: ValueKey(state.step),
+          axis: axis,
           slidingIn: steps[state.step].builder(context),
           slidingOut: state.prevStep != null
               ? steps[state.prevStep!].builder(context)
@@ -70,7 +96,7 @@ class MementoStepper extends StatelessWidget {
     required BuildContext context,
     required StepperState state,
     required int index,
-    required double height,
+    required double axisDimension,
   }) =>
       AnimatedPositioned(
         key: ValueKey(index),
@@ -78,8 +104,13 @@ class MementoStepper extends StatelessWidget {
         width: 24,
         height: 24,
         duration: LONG_ANIMATION_DURATION,
-        left: 8,
-        top: _labelPosition(index, state, height),
+        left: axis == Axis.horizontal
+            ? _labelPosition(index, state, axisDimension)
+            : 8,
+        top: axis == Axis.vertical
+            ? _labelPosition(index, state, axisDimension)
+            : null,
+        bottom: axis == Axis.horizontal ? 0 : null,
         child: StepLabel(
           key: ValueKey(index),
           step: index + 1,
@@ -88,12 +119,12 @@ class MementoStepper extends StatelessWidget {
         ),
       );
 
-  double _labelPosition(int index, StepperState state, double height) =>
+  double _labelPosition(int index, StepperState state, double axisDimension) =>
       index == state.step
-          ? height / 2 - 12
+          ? axisDimension / 2 - 12
           : index < state.step
               ? 32.0 * index
-              : height - 32.0 * (steps.length - 1 - index) - 24;
+              : axisDimension - 32.0 * (steps.length - 1 - index) - 24;
 
   StepLabelState _labelState(int index, StepperState state) =>
       index == state.step

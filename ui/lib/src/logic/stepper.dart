@@ -1,27 +1,30 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-enum StepperDirection { up, down }
+enum StepperDirection { prev, next }
 
 class StepperState {
-  final StepperDirection direction;
   final int step;
   final int? prevStep;
 
+  StepperDirection get direction => prevStep != null
+      ? step > prevStep!
+          ? StepperDirection.next
+          : StepperDirection.prev
+      : StepperDirection.next;
+
   StepperState({
-    this.direction = StepperDirection.down,
     this.step = 0,
     this.prevStep,
   });
 }
 
 class StepperCubit extends Cubit<StepperState> {
-
   final int maxStep;
 
   StepperCubit({required this.maxStep}) : super(StepperState());
 
-  void scrollDown(){
-    if(state.step < maxStep)
+  void scrollNext() {
+    if (state.step < maxStep)
       emit(
         StepperState(
           step: state.step + 1,
@@ -30,11 +33,10 @@ class StepperCubit extends Cubit<StepperState> {
       );
   }
 
-  void scrollUp(){
-    if(state.step > 0)
+  void scrollPrev() {
+    if (state.step > 0)
       emit(
         StepperState(
-          direction: StepperDirection.up,
           step: state.step - 1,
           prevStep: state.step,
         ),
@@ -42,11 +44,9 @@ class StepperCubit extends Cubit<StepperState> {
   }
 
   void jump(int step) {
-    if (step != state.step && step >=0 && step <= maxStep)
+    if (step != state.step && step >= 0 && step <= maxStep)
       emit(
         StepperState(
-          direction:
-              step < state.step ? StepperDirection.up : StepperDirection.down,
           step: step,
           prevStep: state.step,
         ),

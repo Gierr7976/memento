@@ -6,27 +6,53 @@ class StepperSlider extends StatefulWidget {
   final Widget? slidingOut;
   final Widget slidingIn;
   final StepperDirection direction;
+  final Axis axis;
 
   StepperSlider({
     Key? key,
     this.slidingOut,
     required this.slidingIn,
     required this.direction,
+    this.axis = Axis.vertical,
   }) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => StepperSliderState();
+  State<StatefulWidget> createState() => axis == Axis.vertical
+      ? _VerticalStepperSliderState()
+      : _HorizontalStepperSliderState();
 }
 
-class StepperSliderState extends State<StepperSlider>
+class _VerticalStepperSliderState extends _StepperSliderState {
+  _VerticalStepperSliderState()
+      : super(
+          prevPosition: Offset(0, -2),
+          nextPosition: Offset(0, 2),
+        );
+}
+
+class _HorizontalStepperSliderState extends _StepperSliderState {
+  _HorizontalStepperSliderState()
+      : super(
+          prevPosition: Offset(-2, 0),
+          nextPosition: Offset(2, 0),
+        );
+}
+
+abstract class _StepperSliderState extends State<StepperSlider>
     with SingleTickerProviderStateMixin {
-  static const _DOWN = Offset(0, 2);
   static const _CENTER = Offset(0, 0);
-  static const _UP = Offset(0, -2);
+
+  final Offset prevPosition;
+  final Offset nextPosition;
 
   late final AnimationController _controller;
   late final Animation<Offset> _slideInAnimation;
   late final Animation<Offset> _slideOutAnimation;
+
+  _StepperSliderState({
+    required this.prevPosition,
+    required this.nextPosition,
+  });
 
   @override
   void initState() {
@@ -40,13 +66,17 @@ class StepperSliderState extends State<StepperSlider>
         CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
 
     _slideInAnimation = Tween<Offset>(
-      begin: widget.direction == StepperDirection.up ? _UP : _DOWN,
+      begin: widget.direction == StepperDirection.prev
+          ? prevPosition
+          : nextPosition,
       end: _CENTER,
     ).animate(animation);
 
     _slideOutAnimation = Tween<Offset>(
       begin: _CENTER,
-      end: widget.direction == StepperDirection.up ? _DOWN : _UP,
+      end: widget.direction == StepperDirection.prev
+          ? nextPosition
+          : prevPosition,
     ).animate(animation);
 
     _controller.forward();
