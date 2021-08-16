@@ -4,11 +4,14 @@ import 'package:memento_ui/src/basics/clickable/clickable.dart';
 
 @immutable
 class ElevatedClickable extends Clickable with MementoColorThemeUserMixin {
+
+  final Color? color;
+
   ElevatedClickable({
     Key? key,
     required Widget child,
     BoxShape shape = BoxShape.rectangle,
-    Color? color,
+    this.color,
     BoxConstraints constraints = Clickable.DEFAULT_CONSTRAINTS,
     GestureTapCallback? onTap,
     bool enabled = true,
@@ -20,7 +23,6 @@ class ElevatedClickable extends Clickable with MementoColorThemeUserMixin {
           child: child,
           onTap: onTap,
           enabled: enabled,
-          color: color,
           border: border,
           shadow: MementoElevations.e2,
         );

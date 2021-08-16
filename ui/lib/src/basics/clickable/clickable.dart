@@ -8,7 +8,6 @@ abstract class Clickable extends StatelessWidget {
       BoxConstraints(minWidth: 48, minHeight: 48);
 
   final Widget child;
-  final Color? color;
   final BoxConstraints constraints;
   final GestureTapCallback? onTap;
   final bool enabled;
@@ -20,7 +19,6 @@ abstract class Clickable extends StatelessWidget {
     Key? key,
     required this.child,
     required this.constraints,
-    this.color,
     this.shape = BoxShape.rectangle,
     this.onTap,
     this.enabled = true,
@@ -59,6 +57,7 @@ abstract class Clickable extends StatelessWidget {
         child: InkWell(
           child: child,
           onTap: enabled ? onTap : null,
+          splashColor: Colors.black12,
         ),
       );
 
