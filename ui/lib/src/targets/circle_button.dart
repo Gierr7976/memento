@@ -23,15 +23,15 @@ class MementoCircleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => FlatClickable(
-    child: Center(
-      child: _icon(context),
-    ),
-    color: groundColor,
-    onTap: onTap,
-    enabled: enabled,
-    shape: BoxShape.circle,
-    constraints: BoxConstraints.tightFor(width: 48, height: 48),
-  );
+        child: Center(
+          child: _icon(context),
+        ),
+        color: groundColor,
+        onTap: onTap,
+        enabled: enabled,
+        shape: BoxShape.circle,
+        constraints: BoxConstraints.tightFor(width: 48, height: 48),
+      );
 
   AnimatedSwitcher _icon(BuildContext context) => AnimatedSwitcher(
         duration: SMALL_ANIMATION_DURATION,

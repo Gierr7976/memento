@@ -40,8 +40,8 @@ abstract class Button extends StatelessWidget with MementoColorThemeUserMixin {
       enabled ? contentColor! : colorTheme(context).dimmedText;
 
   @mustCallSuper
-  Color getGroundColor(BuildContext context, [Color? groundColor]) => enabled
-      ? groundColor! : colorTheme(context).background;
+  Color getGroundColor(BuildContext context, [Color? groundColor]) =>
+      enabled ? groundColor! : colorTheme(context).background;
 
   Padding _paddedContent(BuildContext context) => Padding(
         padding: EdgeInsets.only(
@@ -65,7 +65,9 @@ abstract class Button extends StatelessWidget with MementoColorThemeUserMixin {
       if (text != null && icon != null) _counterIndent,
     ];
 
-    return alignment == ButtonAlignment.right? content.reversed.toList() : content;
+    return alignment == ButtonAlignment.right
+        ? content.reversed.toList()
+        : content;
   }
 
   MainAxisAlignment get _contentAlignment {
@@ -82,7 +84,8 @@ abstract class Button extends StatelessWidget with MementoColorThemeUserMixin {
 
   Text _text(BuildContext context) => Text(
         text!,
-        style: MementoText.mediumLabel.copyWith(color: getContentColor(context)),
+        style:
+            MementoText.mediumLabel.copyWith(color: getContentColor(context)),
         textAlign: TextAlign.center,
         softWrap: true,
       );

@@ -22,7 +22,8 @@ class SliderAnimationBuilder extends StatefulWidget {
       : _HorizontalSliderAnimationBuilderState();
 }
 
-class _VerticalSliderAnimationBuilderState extends _SliderAnimationBuilderState {
+class _VerticalSliderAnimationBuilderState
+    extends _SliderAnimationBuilderState {
   _VerticalSliderAnimationBuilderState()
       : super(
           prevPosition: Offset(0, -2),
@@ -30,7 +31,8 @@ class _VerticalSliderAnimationBuilderState extends _SliderAnimationBuilderState 
         );
 }
 
-class _HorizontalSliderAnimationBuilderState extends _SliderAnimationBuilderState {
+class _HorizontalSliderAnimationBuilderState
+    extends _SliderAnimationBuilderState {
   _HorizontalSliderAnimationBuilderState()
       : super(
           prevPosition: Offset(-2, 0),
@@ -38,8 +40,8 @@ class _HorizontalSliderAnimationBuilderState extends _SliderAnimationBuilderStat
         );
 }
 
-abstract class _SliderAnimationBuilderState extends State<SliderAnimationBuilder>
-    with SingleTickerProviderStateMixin {
+abstract class _SliderAnimationBuilderState
+    extends State<SliderAnimationBuilder> with SingleTickerProviderStateMixin {
   static const _CENTER = Offset(0, 0);
 
   final Offset prevPosition;

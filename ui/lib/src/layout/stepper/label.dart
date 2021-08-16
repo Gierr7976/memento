@@ -23,24 +23,24 @@ class StepLabel extends StatelessWidget with MementoColorThemeUserMixin {
 
   @override
   Widget build(BuildContext context) => ElevatedClickable(
-    child: Center(
-      child: _label(context),
-    ),
-    onTap: onTap,
-    color: _color(context),
-    shape: BoxShape.circle,
-    constraints: BoxConstraints.tightFor(
-      width: _SIZE,
-      height: _SIZE,
-    ),
-    duration: LONG_ANIMATION_DURATION,
-  );
+        child: Center(
+          child: _label(context),
+        ),
+        onTap: onTap,
+        color: _color(context),
+        shape: BoxShape.circle,
+        constraints: BoxConstraints.tightFor(
+          width: _SIZE,
+          height: _SIZE,
+        ),
+        duration: LONG_ANIMATION_DURATION,
+      );
 
   Text _label(BuildContext context) => Text(
-    '$step',
-    style: MementoText.body16
-        .copyWith(color: colorTheme(context).background),
-  );
+        '$step',
+        style:
+            MementoText.body16.copyWith(color: colorTheme(context).background),
+      );
 
   Color _color(BuildContext context) {
     switch (state) {

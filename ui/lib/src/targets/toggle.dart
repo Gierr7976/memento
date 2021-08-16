@@ -29,7 +29,7 @@ class MementoToggle extends Toggleable {
   Clickable _ground(BuildContext context, bool state) => FlatClickable(
         child: _content(context, state),
         enabled: enabled,
-        color: state? MementoColorTheme.of(context).dimmedOk : null,
+        color: state ? MementoColorTheme.of(context).dimmedOk : null,
         onTap: () => tap(state, context),
       );
 

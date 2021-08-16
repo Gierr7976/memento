@@ -20,35 +20,37 @@ class MementoSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext _) => BlocProvider(
-    create: (__) => SliderCubit(maxSlide: slides.length - 1),
-    child: Builder(
-      builder: (context) => SimpleGestureDetector(
-        child: Stack(
-          children: [
-            _body(),
-            ...additional,
-          ],
+        create: (__) => SliderCubit(maxSlide: slides.length - 1),
+        child: Builder(
+          builder: (context) => SimpleGestureDetector(
+            child: Stack(
+              children: [
+                _body(),
+                ...additional,
+              ],
+            ),
+            behavior: HitTestBehavior.translucent,
+            onHorizontalSwipe: axis == Axis.horizontal
+                ? (direction) => _onHorizontalSwipe(direction, context)
+                : null,
+            onVerticalSwipe: axis == Axis.vertical
+                ? (direction) => _onVerticalSwipe(direction, context)
+                : null,
+          ),
         ),
-        behavior: HitTestBehavior.translucent,
-        onHorizontalSwipe: axis == Axis.horizontal
-            ? (direction) => _onHorizontalSwipe(direction, context)
-            : null,
-        onVerticalSwipe: axis == Axis.vertical
-            ? (direction) => _onVerticalSwipe(direction, context)
-            : null,
-      ),
-    ),
-  );
+      );
 
   BlocBuilder _body() => BlocBuilder<SliderCubit, SliderState>(
-    builder: (context, state) => state.prevSlide != null? SliderAnimationBuilder(
-      key: ValueKey(state.slide),
-      axis: axis,
-      slidingIn: slides[state.slide](context),
-      slidingOut: slides[state.prevSlide!](context),
-      direction: state.direction,
-    ) : slides[state.slide](context),
-  );
+        builder: (context, state) => state.prevSlide != null
+            ? SliderAnimationBuilder(
+                key: ValueKey(state.slide),
+                axis: axis,
+                slidingIn: slides[state.slide](context),
+                slidingOut: slides[state.prevSlide!](context),
+                direction: state.direction,
+              )
+            : slides[state.slide](context),
+      );
 
   void _onVerticalSwipe(SwipeDirection direction, BuildContext context) =>
       direction == SwipeDirection.down

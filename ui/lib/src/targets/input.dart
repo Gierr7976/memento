@@ -45,32 +45,33 @@ class MementoInput extends StatelessWidget {
         ),
       );
 
-  ElevatedClickable _ground(BuildContext context, InputState state) => ElevatedClickable(
-    constraints: BoxConstraints.tightFor(height: 48),
-    child: _body(context, state),
-    onTap: () => focusNode.requestFocus(),
-    color: MementoColorTheme.of(context).background,
-    shadow: MementoElevations.inset,
-    border: Border.all(color: _color(context, state, true), width: 1),
-  );
+  ElevatedClickable _ground(BuildContext context, InputState state) =>
+      ElevatedClickable(
+        constraints: BoxConstraints.tightFor(height: 48),
+        child: _body(context, state),
+        onTap: () => focusNode.requestFocus(),
+        color: MementoColorTheme.of(context).background,
+        shadow: MementoElevations.inset,
+        border: Border.all(color: _color(context, state, true), width: 1),
+      );
 
   Padding _body(BuildContext context, InputState state) => Padding(
-    padding: EdgeInsets.only(left: 16, right: 16),
-    child: Stack(
-      children: [
-        _title(context, state),
-        Padding(
-          padding: EdgeInsets.only(top: 12, bottom: 12),
-          child: Row(
-            children: [
-              _inputField(context),
-              _iconWithIndent(context, state),
-            ],
-          ),
+        padding: EdgeInsets.only(left: 16, right: 16),
+        child: Stack(
+          children: [
+            _title(context, state),
+            Padding(
+              padding: EdgeInsets.only(top: 12, bottom: 12),
+              child: Row(
+                children: [
+                  _inputField(context),
+                  _iconWithIndent(context, state),
+                ],
+              ),
+            ),
+          ],
         ),
-      ],
-    ),
-  );
+      );
 
   Padding _iconWithIndent(BuildContext context, InputState state) => Padding(
         padding: EdgeInsets.only(left: 16),
