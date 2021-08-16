@@ -27,6 +27,7 @@ class Ground extends StatelessWidget {
   @override
   Widget build(BuildContext context) => AnimatedContainer(
         duration: duration,
+        curve: Curves.easeInOut,
         constraints: constraints,
         decoration: BoxDecoration(
             color: color,

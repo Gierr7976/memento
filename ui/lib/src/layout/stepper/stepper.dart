@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:memento_ui/src/layout/slider/slider.dart';
 import 'package:memento_ui/src/layout/stepper/label.dart';
-import 'package:memento_ui/src/layout/stepper/slider.dart';
 import 'package:memento_ui/src/layout/stepper/step.dart';
 import 'package:memento_ui/src/logic/stepper.dart';
 import 'package:memento_ui/src/misc/constants.dart';
-import 'package:simple_gesture_detector/simple_gesture_detector.dart';
 
 class MementoStepper extends StatelessWidget {
   final List<MementoStep> steps;
@@ -18,7 +17,7 @@ class MementoStepper extends StatelessWidget {
     this.axis = Axis.vertical,
   }) : super(key: key);
 
-  static StepperCubit of(BuildContext context) => context.read();
+  static SliderCubit of(BuildContext context) => context.read();
 
   @override
   Widget build(BuildContext _) => Container(
@@ -26,43 +25,20 @@ class MementoStepper extends StatelessWidget {
           minWidth: axis == Axis.horizontal ? _minWidth : 0,
           minHeight: axis == Axis.vertical ? _minHeight : 0,
         ),
-        child: BlocProvider(
-          create: (_) => StepperCubit(maxStep: steps.length - 1),
-          child: Builder(
-            builder: (context) => SimpleGestureDetector(
-              behavior: HitTestBehavior.translucent,
-              child: Stack(
-                children: [
-                  _body(),
-                  _labels(),
-                ],
-              ),
-              onVerticalSwipe: axis == Axis.vertical
-                  ? (direction) => _onVerticalSwipe(direction, context)
-                  : null,
-              onHorizontalSwipe: axis == Axis.horizontal
-                  ? (direction) => _onHorizontalSwipe(direction, context)
-                  : null,
-            ),
-          ),
+        child: MementoSlider(
+          slides: [for (MementoStep step in steps) step.builder],
+          axis: axis,
+          additional: [
+            _labels(),
+          ],
         ),
       );
-
-  void _onVerticalSwipe(SwipeDirection direction, BuildContext context) =>
-      direction == SwipeDirection.down
-          ? MementoStepper.of(context).scrollPrev()
-          : MementoStepper.of(context).scrollNext();
-
-  void _onHorizontalSwipe(SwipeDirection direction, BuildContext context) =>
-      direction == SwipeDirection.right
-          ? MementoStepper.of(context).scrollPrev()
-          : MementoStepper.of(context).scrollNext();
 
   double get _minHeight => 16.0 + 32 * steps.length + 200;
 
   double get _minWidth => 16.0 + 32 * steps.length + 128;
 
-  BlocBuilder _labels() => BlocBuilder<StepperCubit, StepperState>(
+  BlocBuilder _labels() => BlocBuilder<SliderCubit, SliderState>(
         builder: (context, state) => LayoutBuilder(
           builder: (context, constraints) => Stack(
             children: [
@@ -80,21 +56,9 @@ class MementoStepper extends StatelessWidget {
         ),
       );
 
-  BlocBuilder _body() => BlocBuilder<StepperCubit, StepperState>(
-        builder: (context, state) => StepperSlider(
-          key: ValueKey(state.step),
-          axis: axis,
-          slidingIn: steps[state.step].builder(context),
-          slidingOut: state.prevStep != null
-              ? steps[state.prevStep!].builder(context)
-              : null,
-          direction: state.direction,
-        ),
-      );
-
   AnimatedPositioned _label({
     required BuildContext context,
-    required StepperState state,
+    required SliderState state,
     required int index,
     required double axisDimension,
   }) =>
@@ -119,17 +83,17 @@ class MementoStepper extends StatelessWidget {
         ),
       );
 
-  double _labelPosition(int index, StepperState state, double axisDimension) =>
-      index == state.step
+  double _labelPosition(int index, SliderState state, double axisDimension) =>
+      index == state.slide
           ? axisDimension / 2 - 12
-          : index < state.step
+          : index < state.slide
               ? 32.0 * index
               : axisDimension - 32.0 * (steps.length - 1 - index) - 24;
 
-  StepLabelState _labelState(int index, StepperState state) =>
-      index == state.step
+  StepLabelState _labelState(int index, SliderState state) =>
+      index == state.slide
           ? StepLabelState.active
-          : index < state.step
+          : index < state.slide
               ? steps[index].validator()
                   ? StepLabelState.ok
                   : StepLabelState.error

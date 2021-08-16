@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:memento_style/memento_style.dart';
+import 'package:memento_ui/src/basics/clickable/variants.dart';
 import 'package:memento_ui/src/misc/constants.dart';
 
 enum StepLabelState { standby, active, ok, error }
@@ -21,27 +22,18 @@ class StepLabel extends StatelessWidget with MementoColorThemeUserMixin {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => AnimatedContainer(
-        duration: MEDIUM_ANIMATION_DURATION,
-        width: _SIZE,
-        height: _SIZE,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: _color(context),
-          boxShadow: MementoElevations.e2,
-        ),
-        child: _touch(context),
-      );
-
-  Material _touch(BuildContext context) => Material(
-    color: Colors.transparent,
-    child: InkWell(
-      borderRadius: BorderRadius.circular(12),
-      child: Center(
-        child: _label(context),
-      ),
-      onTap: onTap,
+  Widget build(BuildContext context) => ElevatedClickable(
+    child: Center(
+      child: _label(context),
     ),
+    onTap: onTap,
+    color: _color(context),
+    shape: BoxShape.circle,
+    constraints: BoxConstraints.tightFor(
+      width: _SIZE,
+      height: _SIZE,
+    ),
+    duration: LONG_ANIMATION_DURATION,
   );
 
   Text _label(BuildContext context) => Text(

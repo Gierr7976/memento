@@ -24,7 +24,7 @@ class StepperTest extends StatelessWidget {
                     child: Text('1', style: MementoText.display1,),
                   ),
                 ),
-                MementoButton(
+                MementoFlatButton(
                   icon: TablerIcons.chevron_down,
                   onTap: () => MementoStepper.of(context).scrollNext(),
                 )
@@ -34,7 +34,7 @@ class StepperTest extends StatelessWidget {
           MementoStep(
             builder: (context) => Column(
               children: [
-                MementoButton(
+                MementoFlatButton(
                   icon: TablerIcons.chevron_up,
                   onTap: () => MementoStepper.of(context).scrollPrev(),
                 ),

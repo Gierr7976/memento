@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:memento_ui/src/logic/stepper.dart';
 import 'package:memento_ui/src/misc/constants.dart';
 
-class StepperSlider extends StatefulWidget {
+class SliderAnimationBuilder extends StatefulWidget {
   final Widget? slidingOut;
   final Widget slidingIn;
-  final StepperDirection direction;
+  final SliderDirection direction;
   final Axis axis;
 
-  StepperSlider({
+  SliderAnimationBuilder({
     Key? key,
     this.slidingOut,
     required this.slidingIn,
@@ -18,27 +18,27 @@ class StepperSlider extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => axis == Axis.vertical
-      ? _VerticalStepperSliderState()
-      : _HorizontalStepperSliderState();
+      ? _VerticalSliderAnimationBuilderState()
+      : _HorizontalSliderAnimationBuilderState();
 }
 
-class _VerticalStepperSliderState extends _StepperSliderState {
-  _VerticalStepperSliderState()
+class _VerticalSliderAnimationBuilderState extends _SliderAnimationBuilderState {
+  _VerticalSliderAnimationBuilderState()
       : super(
           prevPosition: Offset(0, -2),
           nextPosition: Offset(0, 2),
         );
 }
 
-class _HorizontalStepperSliderState extends _StepperSliderState {
-  _HorizontalStepperSliderState()
+class _HorizontalSliderAnimationBuilderState extends _SliderAnimationBuilderState {
+  _HorizontalSliderAnimationBuilderState()
       : super(
           prevPosition: Offset(-2, 0),
           nextPosition: Offset(2, 0),
         );
 }
 
-abstract class _StepperSliderState extends State<StepperSlider>
+abstract class _SliderAnimationBuilderState extends State<SliderAnimationBuilder>
     with SingleTickerProviderStateMixin {
   static const _CENTER = Offset(0, 0);
 
@@ -49,7 +49,7 @@ abstract class _StepperSliderState extends State<StepperSlider>
   late final Animation<Offset> _slideInAnimation;
   late final Animation<Offset> _slideOutAnimation;
 
-  _StepperSliderState({
+  _SliderAnimationBuilderState({
     required this.prevPosition,
     required this.nextPosition,
   });
@@ -66,7 +66,7 @@ abstract class _StepperSliderState extends State<StepperSlider>
         CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
 
     _slideInAnimation = Tween<Offset>(
-      begin: widget.direction == StepperDirection.prev
+      begin: widget.direction == SliderDirection.prev
           ? prevPosition
           : nextPosition,
       end: _CENTER,
@@ -74,7 +74,7 @@ abstract class _StepperSliderState extends State<StepperSlider>
 
     _slideOutAnimation = Tween<Offset>(
       begin: _CENTER,
-      end: widget.direction == StepperDirection.prev
+      end: widget.direction == SliderDirection.prev
           ? nextPosition
           : prevPosition,
     ).animate(animation);

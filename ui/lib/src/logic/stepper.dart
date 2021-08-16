@@ -1,54 +1,54 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-enum StepperDirection { prev, next }
+enum SliderDirection { prev, next }
 
-class StepperState {
-  final int step;
-  final int? prevStep;
+class SliderState {
+  final int slide;
+  final int? prevSlide;
 
-  StepperDirection get direction => prevStep != null
-      ? step > prevStep!
-          ? StepperDirection.next
-          : StepperDirection.prev
-      : StepperDirection.next;
+  SliderDirection get direction => prevSlide != null
+      ? slide > prevSlide!
+          ? SliderDirection.next
+          : SliderDirection.prev
+      : SliderDirection.next;
 
-  StepperState({
-    this.step = 0,
-    this.prevStep,
+  SliderState({
+    this.slide = 0,
+    this.prevSlide,
   });
 }
 
-class StepperCubit extends Cubit<StepperState> {
-  final int maxStep;
+class SliderCubit extends Cubit<SliderState> {
+  final int maxSlide;
 
-  StepperCubit({required this.maxStep}) : super(StepperState());
+  SliderCubit({required this.maxSlide}) : super(SliderState());
 
   void scrollNext() {
-    if (state.step < maxStep)
+    if (state.slide < maxSlide)
       emit(
-        StepperState(
-          step: state.step + 1,
-          prevStep: state.step,
+        SliderState(
+          slide: state.slide + 1,
+          prevSlide: state.slide,
         ),
       );
   }
 
   void scrollPrev() {
-    if (state.step > 0)
+    if (state.slide > 0)
       emit(
-        StepperState(
-          step: state.step - 1,
-          prevStep: state.step,
+        SliderState(
+          slide: state.slide - 1,
+          prevSlide: state.slide,
         ),
       );
   }
 
-  void jump(int step) {
-    if (step != state.step && step >= 0 && step <= maxStep)
+  void jump(int slide) {
+    if (slide != state.slide && slide >= 0 && slide <= maxSlide)
       emit(
-        StepperState(
-          step: step,
-          prevStep: state.step,
+        SliderState(
+          slide: slide,
+          prevSlide: state.slide,
         ),
       );
   }
