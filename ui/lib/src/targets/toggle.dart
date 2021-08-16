@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:memento_style/memento_style.dart';
-import 'package:memento_ui/src/misc/clickable.dart';
+import 'package:memento_ui/src/basics/clickable/clickable.dart';
+import 'package:memento_ui/src/basics/clickable/variants.dart';
 import 'package:memento_ui/src/misc/toggleable.dart';
 import 'package:memento_ui/src/tabler_icons.dart';
 
@@ -25,10 +26,10 @@ class MementoToggle extends Toggleable {
   @override
   Widget builder(BuildContext context, bool state) => _ground(context, state);
 
-  Clickable _ground(BuildContext context, bool state) => Clickable(
+  Clickable _ground(BuildContext context, bool state) => FlatClickable(
         child: _content(context, state),
         enabled: enabled,
-        color: state && enabled ? MementoColorTheme.of(context).dimmedOk : null,
+        color: state? MementoColorTheme.of(context).dimmedOk : null,
         onTap: () => tap(state, context),
       );
 
