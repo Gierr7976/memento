@@ -15,6 +15,7 @@ class ElevatedClickable extends Clickable with MementoColorThemeUserMixin {
     GestureTapCallback? onTap,
     bool enabled = true,
     BoxBorder? border,
+    List<BoxShadow>? shadow,
   }) : super(
           key: key,
           constraints: constraints,
@@ -23,7 +24,7 @@ class ElevatedClickable extends Clickable with MementoColorThemeUserMixin {
           onTap: onTap,
           enabled: enabled,
           border: border,
-          shadow: MementoElevations.e2,
+          shadow: shadow ?? MementoElevations.e2,
         );
 
   @override

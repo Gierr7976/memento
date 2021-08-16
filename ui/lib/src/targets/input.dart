@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:memento_style/memento_style.dart';
+import 'package:memento_ui/src/basics/clickable/variants.dart';
 import 'package:memento_ui/src/logic/input.dart';
 import 'package:memento_ui/src/misc/constants.dart';
 import 'package:memento_ui/src/tabler_icons.dart';
@@ -44,48 +45,42 @@ class MementoInput extends StatelessWidget {
         ),
       );
 
-  AnimatedContainer _ground(BuildContext context, InputState state) =>
-      AnimatedContainer(
-        duration: SMALL_ANIMATION_DURATION,
-        height: 48,
-        decoration: _groundDecoration(context, state),
-        child: _interactive(state, context),
-      );
+  ElevatedClickable _ground(BuildContext context, InputState state) => ElevatedClickable(
+    constraints: BoxConstraints.tightFor(height: 48),
+    child: _body(context, state),
+    onTap: () => focusNode.requestFocus(),
+    color: MementoColorTheme.of(context).background,
+    shadow: MementoElevations.inset,
+    border: Border.all(color: _color(context, state, true), width: 1),
+  );
 
-  Material _interactive(InputState state, BuildContext context) => Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: GENERIC_BORDER_RADIUS,
-          child: Padding(
-            padding: EdgeInsets.only(left: 16, right: 16),
-            child: Stack(
-              children: [
-                _title(state, context),
-                Padding(
-                  padding: EdgeInsets.only(top: 12, bottom: 12),
-                  child: Row(
-                    children: [
-                      _inputField(context),
-                      _iconWithIndent(state, context),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+  Padding _body(BuildContext context, InputState state) => Padding(
+    padding: EdgeInsets.only(left: 16, right: 16),
+    child: Stack(
+      children: [
+        _title(context, state),
+        Padding(
+          padding: EdgeInsets.only(top: 12, bottom: 12),
+          child: Row(
+            children: [
+              _inputField(context),
+              _iconWithIndent(context, state),
+            ],
           ),
-          onTap: () => focusNode.requestFocus(),
         ),
-      );
+      ],
+    ),
+  );
 
-  Padding _iconWithIndent(InputState state, BuildContext context) => Padding(
+  Padding _iconWithIndent(BuildContext context, InputState state) => Padding(
         padding: EdgeInsets.only(left: 16),
         child: AnimatedSwitcher(
           duration: SMALL_ANIMATION_DURATION,
-          child: _iconOrPlaceholder(state, context),
+          child: _iconOrPlaceholder(context, state),
         ),
       );
 
-  StatelessWidget _iconOrPlaceholder(InputState state, BuildContext context) =>
+  StatelessWidget _iconOrPlaceholder(BuildContext context, InputState state) =>
       state.valid || state.error || standbyIcon != null
           ? Icon(
               _iconType(state),
@@ -123,7 +118,7 @@ class MementoInput extends StatelessWidget {
         ),
       );
 
-  Positioned _title(InputState state, BuildContext context) => Positioned.fill(
+  Positioned _title(BuildContext context, InputState state) => Positioned.fill(
         child: AnimatedSwitcher(
           duration: SMALL_ANIMATION_DURATION,
           child: state.data.isNotEmpty
@@ -146,14 +141,6 @@ class MementoInput extends StatelessWidget {
                   ),
                 ),
         ),
-      );
-
-  BoxDecoration _groundDecoration(BuildContext context, InputState state) =>
-      BoxDecoration(
-        borderRadius: GENERIC_BORDER_RADIUS,
-        color: MementoColorTheme.of(context).background,
-        boxShadow: MementoElevations.inset,
-        border: Border.all(color: _color(context, state, true), width: 1),
       );
 
   Color _color(BuildContext context, InputState state, [bool dim = false]) =>
