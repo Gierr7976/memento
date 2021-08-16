@@ -22,6 +22,7 @@ class CircleButtonTest extends StatelessWidget {
           MementoCircleToggle(
             icon: TablerIcons.check,
             onColor: MementoColorTheme.of(context).strongOk,
+            onGroundColor: MementoColorTheme.of(context).dimmedOk,
             onToggle: (toggle) => print(toggle),
           )
         ],

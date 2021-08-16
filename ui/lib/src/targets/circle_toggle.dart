@@ -9,6 +9,8 @@ class MementoCircleToggle extends Toggleable {
   final bool enabled;
   final Color? onColor;
   final Color? offColor;
+  final Color? onGroundColor;
+  final Color? offGroundColor;
 
   MementoCircleToggle({
     Key? key,
@@ -19,6 +21,8 @@ class MementoCircleToggle extends Toggleable {
     this.enabled = true,
     this.onColor,
     this.offColor,
+    this.onGroundColor,
+    this.offGroundColor,
   }) : super(
           key: key,
           initialState: initialState,
@@ -32,6 +36,7 @@ class MementoCircleToggle extends Toggleable {
       MementoCircleButton(
         icon: icon,
         color: _iconColor(state, context),
+        groundColor: state? onGroundColor : offGroundColor,
         enabled: enabled,
         small: small,
         onTap: () => tap(state, context),

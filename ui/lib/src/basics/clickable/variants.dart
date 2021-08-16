@@ -4,7 +4,6 @@ import 'package:memento_ui/src/basics/clickable/clickable.dart';
 
 @immutable
 class ElevatedClickable extends Clickable with MementoColorThemeUserMixin {
-
   final Color? color;
 
   ElevatedClickable({
@@ -28,18 +27,20 @@ class ElevatedClickable extends Clickable with MementoColorThemeUserMixin {
         );
 
   @override
-  Color getGroundColor(BuildContext context) => enabled
-      ? color ?? colorTheme(context).primary
-      : colorTheme(context).background;
+  Color getColor(BuildContext context, [Color? color]) =>
+      super.getColor(context, this.color ?? colorTheme(context).primary);
 }
 
 @immutable
 class FlatClickable extends Clickable with MementoColorThemeUserMixin {
+  final Color? color;
+
   FlatClickable({
     Key? key,
     required Widget child,
     BoxConstraints constraints = Clickable.DEFAULT_CONSTRAINTS,
     BoxShape shape = BoxShape.rectangle,
+    this.color,
     GestureTapCallback? onTap,
     bool enabled = true,
     BoxBorder? border,
@@ -54,5 +55,6 @@ class FlatClickable extends Clickable with MementoColorThemeUserMixin {
         );
 
   @override
-  Color getGroundColor(BuildContext context) => colorTheme(context).background;
+  Color getColor(BuildContext context, [Color? color]) =>
+      super.getColor(context, this.color ?? colorTheme(context).background);
 }

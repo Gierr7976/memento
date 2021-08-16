@@ -6,12 +6,14 @@ import 'package:memento_ui/src/targets/button/button.dart';
 
 class MementoFlatButton extends Button with MementoColorThemeUserMixin {
   final Color? contentColor;
+  final Color? groundColor;
 
   MementoFlatButton({
     Key? key,
     String? text,
     IconData? icon,
     this.contentColor,
+    this.groundColor,
     BoxShape shape = BoxShape.rectangle,
     bool enabled = true,
     BoxConstraints? constraints,
@@ -34,7 +36,14 @@ class MementoFlatButton extends Button with MementoColorThemeUserMixin {
   Color getContentColor(BuildContext context, [Color? contentColor]) =>
       super.getContentColor(
         context,
-        contentColor ?? colorTheme(context).primary,
+        this.contentColor ?? colorTheme(context).primary,
+      );
+
+  @override
+  Color getGroundColor(BuildContext context, [Color? groundColor]) =>
+      super.getGroundColor(
+        context,
+        this.groundColor ?? colorTheme(context).primary,
       );
 
   @override
@@ -46,6 +55,7 @@ class MementoFlatButton extends Button with MementoColorThemeUserMixin {
         enabled: enabled,
         onTap: onTap,
         constraints: constraints ?? Clickable.DEFAULT_CONSTRAINTS,
+        color: getGroundColor(context),
       );
 }
 
@@ -81,14 +91,14 @@ class MementoButton extends Button with MementoColorThemeUserMixin {
   Color getContentColor(BuildContext context, [Color? contentColor]) =>
       super.getContentColor(
         context,
-        contentColor ?? colorTheme(context).background,
+        this.contentColor ?? colorTheme(context).background,
       );
 
   @override
   Color getGroundColor(BuildContext context, [Color? groundColor]) =>
       super.getGroundColor(
         context,
-        groundColor ?? colorTheme(context).primary,
+        this.groundColor ?? colorTheme(context).primary,
       );
 
   @override

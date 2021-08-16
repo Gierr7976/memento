@@ -8,6 +8,7 @@ class MementoCircleButton extends StatelessWidget {
   final bool small;
   final bool enabled;
   final Color? color;
+  final Color? groundColor;
   final GestureTapCallback? onTap;
 
   const MementoCircleButton({
@@ -16,6 +17,7 @@ class MementoCircleButton extends StatelessWidget {
     this.small = true,
     this.enabled = true,
     this.color,
+    this.groundColor,
     this.onTap,
   }) : super(key: key);
 
@@ -24,6 +26,7 @@ class MementoCircleButton extends StatelessWidget {
     child: Center(
       child: _icon(context),
     ),
+    color: groundColor,
     onTap: onTap,
     enabled: enabled,
     shape: BoxShape.circle,

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:memento_style/memento_style.dart';
 import 'package:memento_ui/src/basics/ground/ground.dart';
 import 'package:memento_ui/src/misc/constants.dart';
 
 @immutable
-abstract class Clickable extends StatelessWidget {
+abstract class Clickable extends StatelessWidget
+    with MementoColorThemeUserMixin {
   static const DEFAULT_CONSTRAINTS =
       BoxConstraints(minWidth: 48, minHeight: 48);
 
@@ -26,7 +28,9 @@ abstract class Clickable extends StatelessWidget {
     this.shadow,
   }) : super(key: key);
 
-  Color getGroundColor(BuildContext context);
+  @mustCallSuper
+  Color getColor(BuildContext context, [Color? color]) =>
+      enabled ? color! : colorTheme(context).background;
 
   @override
   Widget build(BuildContext context) => _ground(
@@ -42,7 +46,7 @@ abstract class Clickable extends StatelessWidget {
   Ground _ground({required BuildContext context, required Widget child}) =>
       Ground(
         shape: shape,
-        color: getGroundColor(context),
+        color: getColor(context),
         constraints: constraints,
         child: child,
         border: border,
