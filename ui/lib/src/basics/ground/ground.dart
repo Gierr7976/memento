@@ -10,12 +10,14 @@ class Ground extends StatelessWidget {
   final BorderRadius? borderRadius;
   final BoxBorder? border;
   final Widget child;
+  final Duration duration;
 
   Ground({
     Key? key,
     required this.shape,
     required this.color,
     required this.constraints,
+    this.duration = SMALL_ANIMATION_DURATION,
     this.shadow,
     this.borderRadius,
     this.border,
@@ -24,7 +26,7 @@ class Ground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => AnimatedContainer(
-        duration: SMALL_ANIMATION_DURATION,
+        duration: duration,
         constraints: constraints,
         decoration: BoxDecoration(
             color: color,

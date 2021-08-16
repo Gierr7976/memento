@@ -43,7 +43,7 @@ class MementoFlatButton extends Button with MementoColorThemeUserMixin {
   Color getGroundColor(BuildContext context, [Color? groundColor]) =>
       super.getGroundColor(
         context,
-        this.groundColor ?? colorTheme(context).primary,
+        this.groundColor ?? colorTheme(context).background,
       );
 
   @override

@@ -16,11 +16,13 @@ abstract class Clickable extends StatelessWidget
   final BoxBorder? border;
   final BoxShape shape;
   final List<BoxShadow>? shadow;
+  final Duration duration;
 
   Clickable({
     Key? key,
     required this.child,
     required this.constraints,
+    this.duration = SMALL_ANIMATION_DURATION,
     this.shape = BoxShape.rectangle,
     this.onTap,
     this.enabled = true,
@@ -45,6 +47,7 @@ abstract class Clickable extends StatelessWidget
 
   Ground _ground({required BuildContext context, required Widget child}) =>
       Ground(
+        duration: duration,
         shape: shape,
         color: getColor(context),
         constraints: constraints,

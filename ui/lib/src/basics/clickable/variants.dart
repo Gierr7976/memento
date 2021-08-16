@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:memento_style/memento_style.dart';
 import 'package:memento_ui/src/basics/clickable/clickable.dart';
+import 'package:memento_ui/src/misc/constants.dart';
 
 @immutable
 class ElevatedClickable extends Clickable with MementoColorThemeUserMixin {
@@ -12,6 +13,7 @@ class ElevatedClickable extends Clickable with MementoColorThemeUserMixin {
     BoxShape shape = BoxShape.rectangle,
     this.color,
     BoxConstraints constraints = Clickable.DEFAULT_CONSTRAINTS,
+    Duration duration = SMALL_ANIMATION_DURATION,
     GestureTapCallback? onTap,
     bool enabled = true,
     BoxBorder? border,
@@ -19,6 +21,7 @@ class ElevatedClickable extends Clickable with MementoColorThemeUserMixin {
   }) : super(
           key: key,
           constraints: constraints,
+          duration: duration,
           shape: shape,
           child: child,
           onTap: onTap,
@@ -41,6 +44,7 @@ class FlatClickable extends Clickable with MementoColorThemeUserMixin {
     required Widget child,
     BoxConstraints constraints = Clickable.DEFAULT_CONSTRAINTS,
     BoxShape shape = BoxShape.rectangle,
+    Duration duration = SMALL_ANIMATION_DURATION,
     this.color,
     GestureTapCallback? onTap,
     bool enabled = true,
@@ -49,6 +53,7 @@ class FlatClickable extends Clickable with MementoColorThemeUserMixin {
           key: key,
           constraints: constraints,
           shape: shape,
+          duration: duration,
           child: child,
           onTap: onTap,
           enabled: enabled,
