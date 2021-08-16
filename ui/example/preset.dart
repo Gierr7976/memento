@@ -15,13 +15,14 @@ class TestPreset extends StatelessWidget {
         create: (__) => BrightTheme(),
         child: Builder(
           builder: (context) => Scaffold(
+
             backgroundColor: MementoColorTheme.of(context).background,
             body: Center(
               child: Container(
                 width: 360,
                 child: child,
                 margin:
-                    EdgeInsets.only(left: 16, top: 64, right: 16, bottom: 32),
+                    EdgeInsets.only(left: 16, top: 64, right: 16, bottom: 8),
               ),
             ),
           ),

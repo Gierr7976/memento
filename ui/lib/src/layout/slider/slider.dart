@@ -41,15 +41,13 @@ class MementoSlider extends StatelessWidget {
   );
 
   BlocBuilder _body() => BlocBuilder<SliderCubit, SliderState>(
-    builder: (context, state) => SliderAnimationBuilder(
+    builder: (context, state) => state.prevSlide != null? SliderAnimationBuilder(
       key: ValueKey(state.slide),
       axis: axis,
       slidingIn: slides[state.slide](context),
-      slidingOut: state.prevSlide != null
-          ? slides[state.prevSlide!](context)
-          : null,
+      slidingOut: slides[state.prevSlide!](context),
       direction: state.direction,
-    ),
+    ) : slides[state.slide](context),
   );
 
   void _onVerticalSwipe(SwipeDirection direction, BuildContext context) =>
