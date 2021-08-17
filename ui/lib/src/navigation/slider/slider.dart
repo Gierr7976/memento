@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:memento_ui/src/layout/slider/animation.dart';
+import 'package:memento_ui/src/navigation/slider/animation.dart';
 import 'package:memento_ui/src/logic/stepper.dart';
 import 'package:simple_gesture_detector/simple_gesture_detector.dart';
 

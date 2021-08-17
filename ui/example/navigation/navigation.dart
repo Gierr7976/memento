@@ -5,7 +5,7 @@ import 'package:memento_ui/src/tabler_icons.dart';
 import 'package:memento_ui/src/targets/button/button.dart';
 import 'package:memento_ui/src/targets/button/variants.dart';
 
-import 'preset.dart';
+import '../preset.dart';
 
 void main() {
   TestPreset(child: ButtonTest()).run();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:memento_ui/src/targets/toggle.dart';
 
-import 'preset.dart';
+import '../preset.dart';
 
 void main() {
   TestPreset(child: ToggleTest()).run();

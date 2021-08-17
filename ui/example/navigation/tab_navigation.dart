@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:memento_ui/src/layout/tab_navigation/tab_navigation.dart';
+import 'package:memento_ui/src/navigation/tab_navigation/tab_navigation.dart';
 import 'package:memento_ui/src/tabler_icons.dart';
 
-import 'preset.dart';
+import '../preset.dart';
 
 void main(){
   TestPreset(child: TabNavigation()).run();

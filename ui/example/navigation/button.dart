@@ -4,7 +4,7 @@ import 'package:memento_ui/src/tabler_icons.dart';
 import 'package:memento_ui/src/targets/navigation/menu_button.dart';
 import 'package:memento_ui/src/targets/navigation/navigation_button.dart';
 
-import 'preset.dart';
+import '../preset.dart';
 
 void main() {
   TestPreset(child: NavigationButtonTest()).run();

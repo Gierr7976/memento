@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:memento_ui/src/targets/input.dart';
 import 'package:simple_gesture_detector/simple_gesture_detector.dart';
 
-import 'preset.dart';
+import '../preset.dart';
 
 void main() {
   TestPreset(

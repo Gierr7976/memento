@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:memento_style/memento_style.dart';
-import 'package:memento_ui/src/layout/stepper/step.dart';
-import 'package:memento_ui/src/layout/stepper/stepper.dart';
+import 'package:memento_ui/src/navigation/stepper/step.dart';
+import 'package:memento_ui/src/navigation/stepper/stepper.dart';
 import 'package:memento_ui/src/tabler_icons.dart';
 import 'package:memento_ui/src/targets/button/variants.dart';
 
-import 'preset.dart';
+import '../preset.dart';
 
 void main() {
   TestPreset(child: StepperTest()).run();
