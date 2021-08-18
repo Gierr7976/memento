@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:memento_style/memento_style.dart';
 
-class MementoAvatar extends StatelessWidget with MementoColorThemeUserMixin {
+class AvatarData {
   final Color color;
   final String label;
 
-  const MementoAvatar({
-    Key? key,
+  AvatarData({
     required this.color,
     required this.label,
-  })  : assert(label.length == 1),
+  });
+}
+
+class MementoAvatar extends StatelessWidget with MementoColorThemeUserMixin {
+  final AvatarData avatar;
+
+  MementoAvatar({
+    Key? key,
+    required this.avatar,
+  })  : assert(avatar.label.length == 1),
         super(key: key);
 
   @override
@@ -18,11 +26,11 @@ class MementoAvatar extends StatelessWidget with MementoColorThemeUserMixin {
         height: 48,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: color,
+          color: avatar.color,
         ),
         child: Center(
           child: Text(
-            label,
+            avatar.label,
             style: MementoText.body16
                 .copyWith(color: colorTheme(context).background),
           ),

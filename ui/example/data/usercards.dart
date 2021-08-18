@@ -9,27 +9,41 @@ void main() {
   TestPreset(child: UserCardTest()).run();
 }
 
+class User {
+  final Color color;
+  final String name;
+  final String role;
+
+  User({
+    required this.color,
+    required this.name,
+    required this.role,
+  });
+}
+
 class UserCardTest extends StatelessWidget {
   @override
-  Widget build(BuildContext _) => MementoSelectableListing<UserCardData>(
+  Widget build(BuildContext _) => MementoSelectableListing<User>(
         elements: [
-          UserCardData(
+          User(
             color: MementoColors.red1,
             name: 'Виктория',
             role: 'Директор лагеря',
           ),
-          UserCardData(
+          User(
               color: MementoColors.purple1,
               name: 'Анастасия',
               role: 'Старший вожатый'),
-          UserCardData(
+          User(
               color: MementoColors.teal1,
               name: 'Наталья',
               role: 'Старший воспитатель'),
         ],
         builder: (context, index, element, [selected = false]) =>
             MementoUserCard(
-          user: element,
+          userName: element.name,
+          userRole: element.role,
+          userColor: element.color,
           selected: selected,
           onLongPress: () => MementoSelectableListing.of(context).toggle(index),
         ),
