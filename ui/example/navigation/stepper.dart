@@ -21,7 +21,10 @@ class StepperTest extends StatelessWidget {
               children: [
                 Expanded(
                   child: Center(
-                    child: Text('1', style: MementoText.display1,),
+                    child: Text(
+                      '1',
+                      style: MementoText.display1,
+                    ),
                   ),
                 ),
                 MementoFlatButton(
@@ -40,7 +43,10 @@ class StepperTest extends StatelessWidget {
                 ),
                 Expanded(
                   child: Center(
-                    child: Text('2', style: MementoText.display1,),
+                    child: Text(
+                      '2',
+                      style: MementoText.display1,
+                    ),
                   ),
                 ),
               ],

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:memento_style/memento_style.dart';
-import 'package:memento_ui/src/navigation/slider/slider.dart';
 import 'package:memento_ui/src/logic/stepper.dart';
 import 'package:memento_ui/src/misc/constants.dart';
+import 'package:memento_ui/src/navigation/slider/slider.dart';
 import 'package:memento_ui/src/targets/circle_button.dart';
 
 class MementoTab {

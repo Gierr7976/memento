@@ -40,23 +40,25 @@ class MementoUserCard extends StatelessWidget with MementoColorThemeUserMixin {
                 label: user.name[0],
               ),
               _text(context),
-              AnimatedSwitcher(
-                duration: SMALL_ANIMATION_DURATION,
-                child: selected
-                    ? Icon(
-                        TablerIcons.circle_check,
-                        size: 24,
-                        color: colorTheme(context).ok,
-                      )
-                    : Container(
-                  width: 24,
-                  height: 24,
-                ),
-              ),
+              _selectionMarker(context),
             ],
           ),
         ),
         onTap: onTap,
+      );
+
+  AnimatedSwitcher _selectionMarker(BuildContext context) => AnimatedSwitcher(
+        duration: FLASH_ANIMATION_DURATION,
+        child: selected
+            ? Icon(
+                TablerIcons.circle_check,
+                size: 24,
+                color: colorTheme(context).ok,
+              )
+            : Container(
+                width: 24,
+                height: 24,
+              ),
       );
 
   Expanded _text(BuildContext context) => Expanded(

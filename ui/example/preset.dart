@@ -15,7 +15,6 @@ class TestPreset extends StatelessWidget {
         create: (__) => BrightTheme(),
         child: Builder(
           builder: (context) => Scaffold(
-
             backgroundColor: MementoColorTheme.of(context).background,
             body: Center(
               child: Container(
