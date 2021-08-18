@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:memento_style/memento_style.dart';
 import 'package:memento_ui/src/basics/clickable/variants.dart';
 import 'package:memento_ui/src/data/user/avatar.dart';
+import 'package:memento_ui/src/misc/constants.dart';
+import 'package:memento_ui/src/tabler_icons.dart';
 
 class UserCardData {
   final Color color;
@@ -18,11 +20,13 @@ class UserCardData {
 class MementoUserCard extends StatelessWidget with MementoColorThemeUserMixin {
   final UserCardData user;
   final GestureTapCallback? onTap;
+  final bool selected;
 
   const MementoUserCard({
     Key? key,
     this.onTap,
     required this.user,
+    this.selected = false,
   }) : super(key: key);
 
   @override
@@ -36,6 +40,19 @@ class MementoUserCard extends StatelessWidget with MementoColorThemeUserMixin {
                 label: user.name[0],
               ),
               _text(context),
+              AnimatedSwitcher(
+                duration: SMALL_ANIMATION_DURATION,
+                child: selected
+                    ? Icon(
+                        TablerIcons.circle_check,
+                        size: 24,
+                        color: colorTheme(context).ok,
+                      )
+                    : Container(
+                  width: 24,
+                  height: 24,
+                ),
+              ),
             ],
           ),
         ),

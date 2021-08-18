@@ -18,7 +18,7 @@ class UserCardTest extends StatelessWidget {
         user: UserCardData(
           color: MementoColors.red1,
           name: 'Виктория',
-          role: 'Директор лагеря'
+          role: 'Директор лагеря',
         ),
         onTap: (){},
       ),
