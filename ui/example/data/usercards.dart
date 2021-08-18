@@ -31,7 +31,7 @@ class UserCardTest extends StatelessWidget {
             MementoUserCard(
           user: element,
           selected: selected,
-          onTap: () => MementoSelectableListing.of(context).toggle(index),
+          onLongPress: () => MementoSelectableListing.of(context).toggle(index),
         ),
       );
 }

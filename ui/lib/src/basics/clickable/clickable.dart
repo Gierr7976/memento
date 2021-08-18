@@ -12,6 +12,7 @@ abstract class Clickable extends StatelessWidget
   final Widget child;
   final BoxConstraints constraints;
   final GestureTapCallback? onTap;
+  final GestureLongPressCallback? onLongPress;
   final bool enabled;
   final BoxBorder? border;
   final BoxShape shape;
@@ -28,6 +29,7 @@ abstract class Clickable extends StatelessWidget
     this.enabled = true,
     this.border,
     this.shadow,
+    this.onLongPress,
   }) : super(key: key);
 
   @mustCallSuper
@@ -64,6 +66,7 @@ abstract class Clickable extends StatelessWidget
         child: InkWell(
           child: child,
           onTap: enabled ? onTap : null,
+          onLongPress: enabled ? onLongPress : null,
           splashColor: Colors.black12,
         ),
       );

@@ -20,6 +20,7 @@ class UserCardData {
 class MementoUserCard extends StatelessWidget with MementoColorThemeUserMixin {
   final UserCardData user;
   final GestureTapCallback? onTap;
+  final GestureLongPressCallback? onLongPress;
   final bool selected;
 
   const MementoUserCard({
@@ -27,6 +28,7 @@ class MementoUserCard extends StatelessWidget with MementoColorThemeUserMixin {
     this.onTap,
     required this.user,
     this.selected = false,
+    this.onLongPress,
   }) : super(key: key);
 
   @override
@@ -45,6 +47,7 @@ class MementoUserCard extends StatelessWidget with MementoColorThemeUserMixin {
           ),
         ),
         onTap: onTap,
+        onLongPress: onLongPress,
       );
 
   AnimatedSwitcher _selectionMarker(BuildContext context) => AnimatedSwitcher(

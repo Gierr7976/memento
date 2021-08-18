@@ -15,6 +15,7 @@ class ElevatedClickable extends Clickable with MementoColorThemeUserMixin {
     BoxConstraints constraints = Clickable.DEFAULT_CONSTRAINTS,
     Duration duration = SMALL_ANIMATION_DURATION,
     GestureTapCallback? onTap,
+    GestureLongPressCallback? onLongPress,
     bool enabled = true,
     BoxBorder? border,
     List<BoxShadow>? shadow,
@@ -25,6 +26,7 @@ class ElevatedClickable extends Clickable with MementoColorThemeUserMixin {
           shape: shape,
           child: child,
           onTap: onTap,
+          onLongPress: onLongPress,
           enabled: enabled,
           border: border,
           shadow: shadow ?? MementoElevations.e2,
@@ -47,6 +49,7 @@ class FlatClickable extends Clickable with MementoColorThemeUserMixin {
     Duration duration = SMALL_ANIMATION_DURATION,
     this.color,
     GestureTapCallback? onTap,
+    GestureLongPressCallback? onLongPress,
     bool enabled = true,
     BoxBorder? border,
   }) : super(
@@ -56,6 +59,7 @@ class FlatClickable extends Clickable with MementoColorThemeUserMixin {
           duration: duration,
           child: child,
           onTap: onTap,
+          onLongPress: onLongPress,
           enabled: enabled,
           border: border,
         );
