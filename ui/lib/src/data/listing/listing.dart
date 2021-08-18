@@ -3,36 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:memento_ui/src/misc/constants.dart';
 
 typedef ElementRepresentationBuilder<T> = Widget Function(
-    BuildContext context, ListingElement<T> element);
-
-@immutable
-class ListingElement<T> {
-  final T data;
-
-  ListingElement({
-    required this.data,
-  });
-
-  static List<ListingElement<T>> fromDataList<T>(List<T> dataList) => [
-        for (T data in dataList) ListingElement(data: data),
-      ];
-
-  ListingElement<T> copyWith({
-    T? data,
-  }) =>
-      ListingElement(
-        data: data ?? this.data,
-      );
-
-  @override
-  bool operator ==(Object other) =>
-      other is ListingElement<T> ? data == other.data : false;
-}
+    BuildContext context, int index, T element);
 
 class MementoListing<T> extends StatelessWidget {
   static const DEFAULT_ITEM_INTERVAL = 8.0;
 
-  final List<ListingElement<T>> elements;
+  final List<T> elements;
   final ElementRepresentationBuilder<T> builder;
   final double itemInterval;
 
@@ -47,13 +23,19 @@ class MementoListing<T> extends StatelessWidget {
   Widget build(BuildContext context) => ClipRRect(
         borderRadius: GENERIC_BORDER_RADIUS,
         child: ListView.builder(
-          itemBuilder: (context, index) => index < elements.length - 1
-              ? Padding(
-                  padding: EdgeInsets.only(bottom: itemInterval),
-                  child: builder(context, elements[index]),
-                )
-              : builder(context, elements[index]),
+          itemBuilder: _buildPaddedElement,
           itemCount: elements.length,
         ),
       );
+
+  Widget _buildPaddedElement(BuildContext context, int index) =>
+      index < elements.length - 1
+          ? Padding(
+              padding: EdgeInsets.only(bottom: itemInterval),
+              child: buildElement(context, index),
+            )
+          : buildElement(context, index);
+
+  Widget buildElement(BuildContext context, int index) =>
+      builder(context, index, elements[index]);
 }
