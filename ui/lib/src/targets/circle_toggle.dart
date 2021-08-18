@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:memento_style/memento_style.dart';
-import 'package:memento_ui/src/misc/toggleable.dart';
+import 'package:memento_ui/src/basics/toggleable.dart';
 import 'package:memento_ui/src/targets/circle_button.dart';
 
 class MementoCircleToggle extends Toggleable {

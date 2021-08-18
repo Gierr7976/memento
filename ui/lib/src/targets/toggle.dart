@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:memento_style/memento_style.dart';
 import 'package:memento_ui/src/basics/clickable/clickable.dart';
 import 'package:memento_ui/src/basics/clickable/variants.dart';
-import 'package:memento_ui/src/misc/toggleable.dart';
+import 'package:memento_ui/src/basics/toggleable.dart';
 import 'package:memento_ui/src/tabler_icons.dart';
 
 class MementoToggle extends Toggleable {
