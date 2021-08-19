@@ -30,15 +30,21 @@ class MementoSlider extends StatelessWidget {
               ],
             ),
             behavior: HitTestBehavior.translucent,
-            onHorizontalSwipe: axis == Axis.horizontal
-                ? (direction) => _onHorizontalSwipe(direction, context)
-                : null,
-            onVerticalSwipe: axis == Axis.vertical
-                ? (direction) => _onVerticalSwipe(direction, context)
-                : null,
+            onHorizontalSwipe: _getHorizontalSwipeCallback(context),
+            onVerticalSwipe: _getVerticalSwipeCallback(context),
           ),
         ),
       );
+
+  Function(SwipeDirection)? _getVerticalSwipeCallback(BuildContext context) =>
+      axis == Axis.vertical
+          ? (direction) => _onVerticalSwipe(direction, context)
+          : null;
+
+  Function(SwipeDirection)? _getHorizontalSwipeCallback(BuildContext context) =>
+      axis == Axis.horizontal
+          ? (direction) => _onHorizontalSwipe(direction, context)
+          : null;
 
   BlocBuilder _body() => BlocBuilder<SliderCubit, SliderState>(
         builder: (context, state) => state.prevSlide != null
