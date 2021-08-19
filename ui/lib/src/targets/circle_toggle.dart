@@ -30,10 +30,7 @@ class MementoCircleToggle extends Toggleable {
         );
 
   @override
-  Widget builder(BuildContext context, bool state) => _button(state, context);
-
-  MementoCircleButton _button(bool state, BuildContext context) =>
-      MementoCircleButton(
+  Widget builder(BuildContext context, bool state) => MementoCircleButton(
         icon: icon,
         color: _iconColor(state, context),
         groundColor: state ? onGroundColor : offGroundColor,
