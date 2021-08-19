@@ -60,45 +60,60 @@ abstract class _SliderAnimationBuilderState
   void initState() {
     super.initState();
 
-    _controller = AnimationController(
-      vsync: this,
-      duration: LONG_ANIMATION_DURATION,
-    );
+    _initController();
     CurvedAnimation animation =
         CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
 
-    _slideInAnimation = Tween<Offset>(
-      begin: widget.direction == SliderDirection.prev
-          ? prevPosition
-          : nextPosition,
-      end: _CENTER,
-    ).animate(animation);
+    _initSlideInAnimation(animation);
 
+    _initSlideOutAnimation(animation);
+
+    _controller.forward();
+  }
+
+  void _initSlideOutAnimation(CurvedAnimation animation) {
     _slideOutAnimation = Tween<Offset>(
       begin: _CENTER,
       end: widget.direction == SliderDirection.prev
           ? nextPosition
           : prevPosition,
     ).animate(animation);
+  }
 
-    _controller.forward();
+  void _initSlideInAnimation(CurvedAnimation animation) {
+    _slideInAnimation = Tween<Offset>(
+      begin: widget.direction == SliderDirection.prev
+          ? prevPosition
+          : nextPosition,
+      end: _CENTER,
+    ).animate(animation);
+  }
+
+  void _initController() {
+    _controller = AnimationController(
+      vsync: this,
+      duration: LONG_ANIMATION_DURATION,
+    );
   }
 
   @override
-  Widget build(BuildContext context) => AnimatedBuilder(
-        animation: _controller,
-        builder: (context, _) => Stack(
-          children: [
-            if (widget.slidingOut != null)
-              SlideTransition(
-                position: _slideOutAnimation,
-                child: widget.slidingOut,
-              ),
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => Stack(
+        children: [
+          if (widget.slidingOut != null)
             SlideTransition(
-              position: _slideInAnimation,
-              child: widget.slidingIn,
+              position: _slideOutAnimation,
+              child: widget.slidingOut,
             ),
-          ],
-        ),
+          SlideTransition(
+            position: _slideInAnimation,
+            child: widget.slidingIn,
+          ),
+        ],
       );
 }
