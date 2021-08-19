@@ -46,15 +46,17 @@ class MementoNavigationButton extends StatelessWidget
         child: Row(
           children: [
             _text(context),
-            Padding(
-              padding: EdgeInsets.only(left: 16),
-              child: Icon(
-                TablerIcons.chevron_right,
-                color: _getTitleColor(context),
-                size: 32,
-              ),
-            ),
+            _icon(context),
           ],
+        ),
+      );
+
+  Padding _icon(BuildContext context) => Padding(
+        padding: EdgeInsets.only(left: 16),
+        child: Icon(
+          TablerIcons.chevron_right,
+          color: _getTitleColor(context),
+          size: 32,
         ),
       );
 
@@ -66,18 +68,20 @@ class MementoNavigationButton extends StatelessWidget
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   _title(context),
-                  Padding(
-                    padding: EdgeInsets.only(top: 8, bottom: 8),
-                    child: Text(
-                      description!,
-                      style: MementoText.small
-                          .copyWith(color: _getDescriptionColor(context)),
-                      softWrap: true,
-                    ),
-                  ),
+                  _description(context),
                 ],
               )
             : _title(context),
+      );
+
+  Padding _description(BuildContext context) => Padding(
+        padding: EdgeInsets.only(top: 8, bottom: 8),
+        child: Text(
+          description!,
+          style:
+              MementoText.small.copyWith(color: _getDescriptionColor(context)),
+          softWrap: true,
+        ),
       );
 
   Widget _title(BuildContext context) => Text(
