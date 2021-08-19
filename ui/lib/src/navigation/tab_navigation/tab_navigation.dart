@@ -53,13 +53,21 @@ class MementoTabNavigation extends StatelessWidget
         curve: Curves.easeInOut,
         child: MementoCircleButton(
           icon: tabs[index].icon,
-          color: _isCurrent(index, state)
-              ? colorTheme(context).primary
-              : colorTheme(context).almostDimmedText,
+          color: _buttonIconColor(context, state, index),
           small: false,
           onTap: () => MementoSlider.of(context).jump(index),
         ),
       );
+
+  Color _buttonIconColor(
+    BuildContext context,
+    SliderState state,
+    int index,
+  ) {
+    return _isCurrent(index, state)
+        ? colorTheme(context).primary
+        : colorTheme(context).almostDimmedText;
+  }
 
   bool _isCurrent(int index, SliderState state) => index == state.slide;
 }
