@@ -62,11 +62,13 @@ class AvatarCard extends StatelessWidget with MementoColorThemeUserMixin {
   Text _title(BuildContext context) => Text(
         title,
         style: MementoText.lead.copyWith(color: colorTheme(context).text),
+        softWrap: true,
       );
 
   Text _description(BuildContext context) => Text(
         description,
         style: MementoText.small
             .copyWith(color: colorTheme(context).almostDimmedText, height: 0.5),
+        softWrap: true,
       );
 }
