@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:memento_style/memento_style.dart';
+import 'package:memento_ui/src/data/collapsible/collapsible.dart';
 import 'package:memento_ui/src/data/listing/listing.dart';
-import 'package:memento_ui/src/layout/collapsible/collapsible.dart';
 
 import '../preset.dart';
 

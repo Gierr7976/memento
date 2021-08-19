@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:memento_style/memento_style.dart';
 import 'package:memento_ui/src/basics/clickable/variants.dart';
 import 'package:memento_ui/src/basics/toggleable.dart';
-import 'package:memento_ui/src/layout/collapsible/collapse_animation.dart';
+import 'package:memento_ui/src/data/collapsible/collapse_animation.dart';
 import 'package:memento_ui/src/logic/toggle.dart';
 import 'package:memento_ui/src/tabler_icons.dart';
 

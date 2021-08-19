@@ -41,7 +41,7 @@ class ListElementTest extends StatelessWidget {
           title: element.title,
           description: element.description,
           selected: selected,
-          onTap: (){},
+          onTap: () {},
           onLongPress: () => MementoSelectableListing.of(context).toggle(index),
         ),
       );
