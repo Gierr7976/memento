@@ -40,20 +40,23 @@ class MementoMenuButton extends StatelessWidget
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding: EdgeInsets.only(bottom: 16),
-              child: Icon(
-                icon,
-                size: 32,
-                color: _getContentColor(context),
-              ),
-            ),
-            Text(
-              text,
-              style:
-                  MementoText.small.copyWith(color: _getContentColor(context)),
-            ),
+            _icon(context),
+            _caption(context),
           ],
+        ),
+      );
+
+  Text _caption(BuildContext context) => Text(
+        text,
+        style: MementoText.small.copyWith(color: _getContentColor(context)),
+      );
+
+  Padding _icon(BuildContext context) => Padding(
+        padding: EdgeInsets.only(bottom: 16),
+        child: Icon(
+          icon,
+          size: 32,
+          color: _getContentColor(context),
         ),
       );
 }
