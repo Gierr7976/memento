@@ -21,7 +21,7 @@ abstract class Toggleable extends StatelessWidget {
 
   Widget builder(BuildContext context, bool state);
 
-  void tap(BuildContext context, bool state) {
+  void toggle(BuildContext context, bool state) {
     onToggle?.call(!state);
     context.read<ToggleCubit>().toggle();
   }

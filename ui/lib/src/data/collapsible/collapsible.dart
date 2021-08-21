@@ -28,7 +28,7 @@ class MementoCollapsible extends Toggleable with MementoColorThemeUserMixin {
             ],
           ),
         ),
-        onTap: () => tap(context, state),
+        onTap: () => toggle(context, state),
       );
 
   CollapseAnimationBuilder _body(BuildContext context, bool state) =>

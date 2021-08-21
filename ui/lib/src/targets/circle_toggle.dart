@@ -36,7 +36,7 @@ class MementoCircleToggle extends Toggleable {
         groundColor: state ? onGroundColor : offGroundColor,
         enabled: enabled,
         small: small,
-        onTap: () => tap(context, state),
+        onTap: () => toggle(context, state),
       );
 
   Color? _iconColor(BuildContext context, bool state) {

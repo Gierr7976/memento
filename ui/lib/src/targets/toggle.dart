@@ -30,7 +30,7 @@ class MementoToggle extends Toggleable {
         child: _content(context, state),
         enabled: enabled,
         color: state ? MementoColorTheme.of(context).dimmedOk : null,
-        onTap: () => tap(context, state),
+        onTap: () => toggle(context, state),
       );
 
   Padding _content(BuildContext context, bool state) => Padding(
