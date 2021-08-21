@@ -3,10 +3,18 @@ import 'package:memento_style/memento_style.dart';
 import 'package:memento_ui/src/basics/clickable/clickable.dart';
 import 'package:memento_ui/src/misc/constants.dart';
 
+/// [Clickable], имеющий тени для визуализации эффекта приподнятости.
+///
+/// <br>
+/// Если эффект приподнятости не требуется, используйте [FlatClickable].
 @immutable
 class ElevatedClickable extends Clickable with MementoColorThemeUserMixin {
+  /// Цвет [Ground], переопределяющий цвет по умолчанию (основной цвет темы).
+  /// Передаётся, когда [ElevatedClickable] доступен для пользовательских
+  /// взаимодействий.
   final Color? color;
 
+  /// Базовый конструктор. Почти все его параметры передаются [Clickable].
   ElevatedClickable({
     Key? key,
     required Widget child,
@@ -32,13 +40,18 @@ class ElevatedClickable extends Clickable with MementoColorThemeUserMixin {
           shadow: shadow ?? MementoElevations.e2,
         );
 
+  /// Определяет цвет, который будет передан [Ground].
   @override
   Color getColor(BuildContext context, [Color? color]) =>
       super.getColor(context, this.color ?? colorTheme(context).primary);
 }
 
+/// [Clickable] без визуализации эффекта приподнятости.
 @immutable
 class FlatClickable extends Clickable with MementoColorThemeUserMixin {
+  /// Цвет [Ground], переопределяющий цвет по умолчанию (фоновый цвет темы).
+  /// Передаётся, когда [FlatClickable] доступен для пользовательских
+  /// взаимодействий.
   final Color? color;
 
   FlatClickable({
@@ -64,6 +77,7 @@ class FlatClickable extends Clickable with MementoColorThemeUserMixin {
           border: border,
         );
 
+  /// Определяет цвет, который будет передан [Ground].
   @override
   Color getColor(BuildContext context, [Color? color]) =>
       super.getColor(context, this.color ?? colorTheme(context).background);
