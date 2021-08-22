@@ -90,7 +90,7 @@ abstract class Clickable extends StatelessWidget
         border: border,
         borderRadius:
             shape == BoxShape.rectangle ? GENERIC_BORDER_RADIUS : null,
-        shadow: shadow,
+        shadow: enabled? shadow : null,
       );
 
   Widget _touch({required BuildContext context, required Widget child}) =>
