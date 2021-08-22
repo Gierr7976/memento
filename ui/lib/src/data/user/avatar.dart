@@ -30,7 +30,7 @@ class MementoAvatar extends StatelessWidget with MementoColorThemeUserMixin {
         ),
         child: Center(
           child: Text(
-            avatar.label,
+            avatar.label.toUpperCase(),
             style: MementoText.body16
                 .copyWith(color: colorTheme(context).background),
           ),
