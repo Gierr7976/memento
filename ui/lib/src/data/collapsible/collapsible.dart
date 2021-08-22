@@ -5,11 +5,29 @@ import 'package:memento_ui/src/basics/toggleable.dart';
 import 'package:memento_ui/src/data/collapsible/collapse_animation.dart';
 import 'package:memento_ui/src/tabler_icons.dart';
 
+/// Виджет с заголовком и телом, которое можно сжимать и расширять.
+///
+/// Использует поведение [Toggleable].
 class MementoCollapsible extends Toggleable with MementoColorThemeUserMixin {
+
+  /// Построитель заголовка.
+  ///
+  /// Учтите, что заголовок отображается в одну строку с индикатором
+  /// сжатия/расширения и выравнивается по центру. В большинстве случаев
+  /// заголовок с большой высотой (больше, чем 50) будет неуместен.
+  ///
+  /// Как правило, заголовком служит текст, обычно [MementoText.mediumLabel].
   final WidgetBuilder headerBuilder;
+
+  /// Построитель тела.
+  ///
+  /// Тело будет отображено изначально, если [collapsed] равно [false].
   final WidgetBuilder bodyBuilder;
+
+  /// Начальное состояние. Тело скрыто, если [collapsed] равно [true].
   final bool collapsed;
 
+  /// Базовый конструктор.
   MementoCollapsible(
       {Key? key,
       required this.headerBuilder,

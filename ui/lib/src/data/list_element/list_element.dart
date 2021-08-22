@@ -1,17 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:memento_style/memento_style.dart';
+import 'package:memento_ui/memento_ui.dart';
 import 'package:memento_ui/src/basics/clickable/variants.dart';
 import 'package:memento_ui/src/misc/constants.dart';
 import 'package:memento_ui/src/tabler_icons.dart';
 
+/// Элемент списка.
+///
+/// Как правило, используется в связке с [MementoListing] или
+/// [MementoSelectableListing] для визуализации разного рода перечней, например
+/// списка лагерных смен.
 class MementoListElement extends StatelessWidget
     with MementoColorThemeUserMixin {
+
+  /// Заголовок элемента. Не следует делать его слишком длинным.
   final String title;
+
+  /// Описание элемента. Если равно [null], элемент отображается без
+  /// соответствующего [Text].
   final String? description;
+
+  /// Выбран ли элемент. Если [true], элемент отмечается маркером.
   final bool selected;
+
+  /// То, что произойдёт, когда пользователь коснётся элемента. Если не равно
+  /// [null], когда элемент не выбран, он отмечается маркером-стрелкой.
   final GestureTapCallback? onTap;
+
+  /// То, что произойдёт, когда пользователь зажмёт элемент. Как правило,
+  /// используется в связке с [MementoSelectableListing] для выбора элемента:
+  ///
+  /// ```dart
+  /// MementoSelectableListing(
+  ///   builder: (context, index, element, [selected = false]) =>
+  ///     MementoListElement(
+  ///       onLongPress: () => MementoSelectableListing.of(context).toggle(index),
+  ///     ),
+  /// );
+  /// ```
   final GestureLongPressCallback? onLongPress;
 
+  /// Базовый конструктор.
   MementoListElement({
     Key? key,
     required this.title,

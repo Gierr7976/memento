@@ -5,14 +5,38 @@ import 'package:memento_ui/src/data/user/avatar.dart';
 import 'package:memento_ui/src/misc/constants.dart';
 import 'package:memento_ui/src/tabler_icons.dart';
 
+/// Карточка пользователя, визуализирующая аватар, имя и должность пользователя.
 class MementoUserCard extends StatelessWidget with MementoColorThemeUserMixin {
+
+  /// Цвет пользователя.
   final Color userColor;
+
+  /// Имя пользователя, видимое для других.
   final String userName;
+
+  /// Должность пользователя.
   final String userRole;
+
+  /// То, что произойдёт, когда пользователь коснётся карточки.
   final GestureTapCallback? onTap;
+
+  /// То, что произойдёт, когда пользователь зажмёт карточку. Как правило,
+  /// используется в связке с [MementoSelectableListing] для выбора карточки:
+  ///
+  /// ```dart
+  /// MementoSelectableListing(
+  ///   builder: (context, index, element, [selected = false]) =>
+  ///     MementoUserCard(
+  ///       onLongPress: () => MementoSelectableListing.of(context).toggle(index),
+  ///     ),
+  /// );
+  /// ```
   final GestureLongPressCallback? onLongPress;
+
+  /// Выбрана ли карточка. Если [true], карточка помечается маркером.
   final bool selected;
 
+  /// Базовый констркутор.
   const MementoUserCard({
     Key? key,
     this.onTap,

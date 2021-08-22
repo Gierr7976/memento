@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:memento_ui/src/data/collapsible/collapsible.dart';
 import 'package:memento_ui/src/misc/constants.dart';
 
+/// Виджет, реализующий анимацию сжатия/расширения для тела [MementoCollapsible].
 class CollapseAnimationBuilder extends StatefulWidget {
+
+  /// Содержимое тела.
   final Widget child;
+
+  /// Состояние сжатия/расширения.
   final bool collapsed;
 
+  /// Базовый конструктор.
   const CollapseAnimationBuilder({
     Key? key,
     required this.child,
@@ -16,9 +23,14 @@ class CollapseAnimationBuilder extends StatefulWidget {
       _CollapseAnimationBuilderState();
 }
 
+/// Состояние [CollapseAnimationBuilder].
 class _CollapseAnimationBuilderState extends State<CollapseAnimationBuilder>
     with SingleTickerProviderStateMixin {
+
+  /// Контроллер анимации.
   late final AnimationController controller;
+
+  /// Анимация сжатия/расширения.
   late final Animation<double> sizeAnimation;
 
   @override

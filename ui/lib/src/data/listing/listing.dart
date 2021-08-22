@@ -2,16 +2,31 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:memento_ui/src/misc/constants.dart';
 
+/// Тип функции-построителя визуализации элемента [MementoListing].
+///
+/// T — класс визуализируемых данных.
 typedef ElementRepresentationBuilder<T> = Widget Function(
     BuildContext context, int index, T element);
 
+/// Виджет для визуализации перечней данных, например смен.
+///
+/// T — класс визуализируемых данных.
 class MementoListing<T> extends StatelessWidget {
+
+  /// Отступ между элементами перечня по умолчанию.
   static const DEFAULT_ITEM_INTERVAL = 8.0;
 
+  /// Список элементов, который будет визуализирован. По умолчанию пустой.
   final List<T> elements;
+
+  /// Построитель, визуализирующий элементы. См. [ElementRepresentationBuilder].
   final ElementRepresentationBuilder<T> builder;
+
+  /// Отступ между элементами перечня. По умолчанию равен
+  /// `DEFAULT_ITEM_INTERVAL`.
   final double itemInterval;
 
+  /// Базовый конструктор.
   MementoListing({
     Key? key,
     this.elements = const [],
