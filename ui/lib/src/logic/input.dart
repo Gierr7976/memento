@@ -11,7 +11,7 @@ class InputState {
     this.error = false,
     this.valid = false,
     this.data = '',
-  });
+  }) : assert(focused && !error && !valid || !focused);
 
   InputState copyWith({
     String? data,
