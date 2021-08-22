@@ -19,6 +19,9 @@ class MementoStepper extends StatelessWidget {
 
   static SliderCubit of(BuildContext context) => context.read();
 
+  static bool validateIn(BuildContext context) =>
+      context.findAncestorWidgetOfExactType<MementoStepper>()!.validateAll();
+
   @override
   Widget build(BuildContext _) => Container(
         constraints: BoxConstraints(
@@ -100,4 +103,9 @@ class MementoStepper extends StatelessWidget {
               : steps[index].validator()
                   ? StepLabelState.ok
                   : StepLabelState.standby;
+
+  bool validateAll() {
+    for (MementoStep step in steps) if (!step.validator()) return false;
+    return true;
+  }
 }
