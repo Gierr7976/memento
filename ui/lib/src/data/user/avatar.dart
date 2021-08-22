@@ -8,7 +8,7 @@ class AvatarData {
   AvatarData({
     required this.color,
     required this.label,
-  });
+  }) : assert(label.length == 1);
 }
 
 class MementoAvatar extends StatelessWidget with MementoColorThemeUserMixin {
@@ -17,8 +17,7 @@ class MementoAvatar extends StatelessWidget with MementoColorThemeUserMixin {
   MementoAvatar({
     Key? key,
     required this.avatar,
-  })  : assert(avatar.label.length == 1),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Container(
