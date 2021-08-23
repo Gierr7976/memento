@@ -1,0 +1,1 @@
+const DEFAULT_TRUSTED_URL = 'https://memento-ais.ru';
