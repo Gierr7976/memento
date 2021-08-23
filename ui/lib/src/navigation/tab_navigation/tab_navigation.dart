@@ -6,17 +6,26 @@ import 'package:memento_ui/src/misc/constants.dart';
 import 'package:memento_ui/src/navigation/slider/slider.dart';
 import 'package:memento_ui/src/targets/circle_button.dart';
 
+/// Данные вкладки.
 class MementoTab {
+  /// Построитель визуализации вкладки.
   final WidgetBuilder builder;
+
+  /// Иконка вкладки.
   final IconData icon;
 
+  /// Базовый конструктор.
   MementoTab({required this.builder, required this.icon});
 }
 
+/// Виджет, реализующий отображение по вкладкам и переходы между ними.
 class MementoTabNavigation extends StatelessWidget
     with MementoColorThemeUserMixin {
+
+  /// Вкладки, доступные для пользователя.
   final List<MementoTab> tabs;
 
+  /// Базовый конструктор.
   MementoTabNavigation({
     Key? key,
     required this.tabs,

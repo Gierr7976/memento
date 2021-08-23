@@ -7,17 +7,28 @@ import 'package:memento_ui/src/navigation/slider/slider.dart';
 import 'package:memento_ui/src/navigation/stepper/label.dart';
 import 'package:memento_ui/src/navigation/stepper/step.dart';
 
+/// Виджет для визуализации пошаговых взаимодействий с пользователем.
 class MementoStepper extends StatelessWidget {
+  /// Шаги, которые проходит пользователь.
   final List<MementoStep> steps;
+
+  /// Ось, по которой размещаются шаги.
   final Axis axis;
 
+  /// Базовый конструктор.
   const MementoStepper({
     Key? key,
     required this.steps,
     this.axis = Axis.vertical,
   }) : super(key: key);
 
+  /// Возвращает [SliderCubit], управляющий пролистыванием.
   static SliderCubit of(BuildContext context) => context.read();
+
+  /// Возвращает [true], если все шаги ближайшего в [context] [MementoStepper]
+  /// успешно проходят валидацию, и [false] в противном случае.
+  static bool validateIn(BuildContext context) =>
+      context.findAncestorWidgetOfExactType<MementoStepper>()!.validateAll();
 
   @override
   Widget build(BuildContext _) => Container(
@@ -34,8 +45,10 @@ class MementoStepper extends StatelessWidget {
         ),
       );
 
+  /// Возвращает минимально допустимую высоту. Для внутреннего пользования.
   double get _minHeight => 16.0 + 32 * steps.length + 200;
 
+  /// Возвращает минимально допустимую ширину. Для внутреннего пользования.
   double get _minWidth => 16.0 + 32 * steps.length + 128;
 
   BlocBuilder _labels() => BlocBuilder<SliderCubit, SliderState>(
@@ -100,4 +113,11 @@ class MementoStepper extends StatelessWidget {
               : steps[index].validator()
                   ? StepLabelState.ok
                   : StepLabelState.standby;
+
+  /// Возвращает [true], если все шаги успешно проходят валидацию, и [false]
+  /// в противном случае.
+  bool validateAll() {
+    for (MementoStep step in steps) if (!step.validator()) return false;
+    return true;
+  }
 }

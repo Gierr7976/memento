@@ -2,15 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:memento_style/memento_style.dart';
 import 'package:memento_ui/src/basics/clickable/variants.dart';
 
+/// Кнопка сетки-меню.
 class MementoMenuButton extends StatelessWidget
     with MementoColorThemeUserMixin {
+  /// Текстовая метка кнопки.
   final String text;
+
+  /// Иконка кнопки.
   final IconData icon;
+
+  /// Цвет текстовой метки и иконки.
   final Color? contentColor;
+
+  /// Цвет подложки, по умолчанию — фоновый цвет темы.
   final Color? groundColor;
+
+  /// Доступность кнопки для пользовательских взаимодейтвий.
   final bool enabled;
+
+  /// То, что произойдёт, когда пользователь коснётся кнопки.
   final GestureTapCallback? onTap;
 
+  /// Базовый конструктор.
   MementoMenuButton({
     Key? key,
     required this.text,

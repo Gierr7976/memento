@@ -4,10 +4,20 @@ import 'package:memento_ui/src/basics/clickable/clickable.dart';
 import 'package:memento_ui/src/basics/clickable/variants.dart';
 import 'package:memento_ui/src/targets/button/button.dart';
 
+/// Кнопка с [FlatClickable], т.е без визуализации эффекта приподнятости.
 class MementoFlatButton extends Button with MementoColorThemeUserMixin {
+  /// Цвет содержимого кнопки, переопределяющий цвет по умолчанию (основной
+  /// цвет темы). Передаётся, когда кнопка доступна для пользовательских
+  /// взаимодействий.
   final Color? contentColor;
+
+  /// Цвет подложки кнопки, переопределяющий цвет по умолчанию (фоновый цвет
+  /// темы). Передаётся, когда кнопка доступна для пользовательских
+  /// взаимодействий.
   final Color? groundColor;
 
+  /// Базовый конструктор. Все параметры, кроме [contentColor] и [groundColor]
+  /// передаются [Button].
   MementoFlatButton({
     Key? key,
     String? text,
@@ -32,6 +42,7 @@ class MementoFlatButton extends Button with MementoColorThemeUserMixin {
           alignment: alignment,
         );
 
+  /// Определяет цвет содержимого кнопки.
   @override
   Color getContentColor(BuildContext context, [Color? contentColor]) =>
       super.getContentColor(
@@ -39,6 +50,7 @@ class MementoFlatButton extends Button with MementoColorThemeUserMixin {
         this.contentColor ?? colorTheme(context).primary,
       );
 
+  /// Определяет цвет подложки кнопки.
   @override
   Color getGroundColor(BuildContext context, [Color? groundColor]) =>
       super.getGroundColor(
@@ -59,10 +71,22 @@ class MementoFlatButton extends Button with MementoColorThemeUserMixin {
       );
 }
 
+/// Кнопка c [ElevatedClickable], т.е с визуализацией эффекта возывышения.
+///
+/// <br>
+/// Если эффект приподнятости не требуется, используйте [MementoFlatButton].
 class MementoButton extends Button with MementoColorThemeUserMixin {
+  /// Цвет содержимого кнопки, переопределяющий цвет по умолчанию (фоновый
+  /// цвет темы). Передаётся, когда кнопка доступна для пользовательских
+  /// взаимодействий.
   final Color? contentColor;
+
+  /// Цвет подложки кнопки, переопределяющий цвет по умолчанию (основной цвет
+  /// темы). Передаётся, когда кнопка доступна для пользовательских
+  /// взаимодействий.
   final Color? groundColor;
 
+  /// Базовый конструктор.
   MementoButton({
     Key? key,
     String? text,
@@ -87,6 +111,7 @@ class MementoButton extends Button with MementoColorThemeUserMixin {
           alignment: alignment,
         );
 
+  /// Определяет цвет содержимого кнопки.
   @override
   Color getContentColor(BuildContext context, [Color? contentColor]) =>
       super.getContentColor(
@@ -94,6 +119,7 @@ class MementoButton extends Button with MementoColorThemeUserMixin {
         this.contentColor ?? colorTheme(context).background,
       );
 
+  /// Определяет цвет подложки кнопки.
   @override
   Color getGroundColor(BuildContext context, [Color? groundColor]) =>
       super.getGroundColor(

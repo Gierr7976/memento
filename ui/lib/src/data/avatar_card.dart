@@ -3,14 +3,28 @@ import 'package:memento_style/memento_style.dart';
 import 'package:memento_ui/src/basics/clickable/variants.dart';
 import 'package:memento_ui/src/data/user/avatar.dart';
 
+/// Карточка с аватаром пользователя, заголовком и описанием.
 class AvatarCard extends StatelessWidget with MementoColorThemeUserMixin {
+
+  /// Данные аватара: цвет и метка пользователя. См. [AvatarData].
   final AvatarData avatar;
+
+  /// Заголовок карточки.
   final String title;
+
+  /// Описание карточки
   final String description;
+
+  /// Дополнения карточки: маркеры, метки и т.п.
   final List<Widget> addons;
+
+  /// То, что произойдёт, когда пользователь коснётся карточки.
   final GestureTapCallback? onTap;
+
+  /// То, что произойдёт, когда пользователь зажмёт карточку.
   final GestureLongPressCallback? onLongPress;
 
+  /// Базовый конструктор.
   AvatarCard({
     Key? key,
     required this.avatar,

@@ -1,17 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:memento_style/memento_style.dart';
 import 'package:memento_ui/src/data/avatar_card.dart';
+import 'package:memento_ui/src/data/listing/listing.dart';
 import 'package:memento_ui/src/data/user/avatar.dart';
 
+/// Карточка темы, кратко представлающая её пользователю.
+///
+/// Как правило, используется в связке с [MementoListing].
 class MementoTopicCard extends StatelessWidget with MementoColorThemeUserMixin {
+
+  /// Цвет автора, подставляется в [MementoAvatar].
   final Color authorColor;
+
+  /// Имя автора, видимое пользователям.
   final String authorName;
+
+  /// Должность автора.
   final String authorRole;
+
+  /// Заголовок темы.
   final String title;
+
+  /// Число уведомлений, связанных с темой, полученных пользователем.
+  /// Если больше девяти, отображается как "9+".
   final int notificationCount;
+
+  /// То, что произойдёт, когда пользователь коснётся карточки.
   final GestureTapCallback? onTap;
+
+  /// То, что произойдёт, когда пользователь зажмёт карточку.
   final GestureLongPressCallback? onLongPress;
 
+  /// Базовый констркутор.
   const MementoTopicCard({
     Key? key,
     this.onTap,

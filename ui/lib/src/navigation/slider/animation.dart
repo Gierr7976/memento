@@ -2,12 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:memento_ui/src/logic/stepper.dart';
 import 'package:memento_ui/src/misc/constants.dart';
 
+/// Построитель анимации переключения слайдов. Для внутреннего пользования.
 class SliderAnimationBuilder extends StatefulWidget {
+
+  /// Уходящий слайд.
   final Widget? slidingOut;
+
+  /// Приходящий слайд.
   final Widget slidingIn;
+
+  /// Направление движения. См. [SliderDirection]
   final SliderDirection direction;
+
+  /// Ось, по которой движутся слайды, по умолчанию [Axis.vertical]. См. [Axis].
   final Axis axis;
 
+  /// Базовый констркутор.
   SliderAnimationBuilder({
     Key? key,
     this.slidingOut,
@@ -22,8 +32,12 @@ class SliderAnimationBuilder extends StatefulWidget {
       : _HorizontalSliderAnimationBuilderState();
 }
 
+/// Конкретизация [_SliderAnimationBuilderState] для переключений в
+/// вертикальной оси. Для внутреннего пользования.
 class _VerticalSliderAnimationBuilderState
     extends _SliderAnimationBuilderState {
+
+  /// Базовый конструктор.
   _VerticalSliderAnimationBuilderState()
       : super(
           prevPosition: Offset(0, -2),
@@ -31,8 +45,12 @@ class _VerticalSliderAnimationBuilderState
         );
 }
 
+/// Конкретизация [_SliderAnimationBuilderState] для переключений в
+/// горизонтальной оси. Для внутреннего пользования.
 class _HorizontalSliderAnimationBuilderState
     extends _SliderAnimationBuilderState {
+
+  /// Базовый конструктор.
   _HorizontalSliderAnimationBuilderState()
       : super(
           prevPosition: Offset(-2, 0),
@@ -40,17 +58,46 @@ class _HorizontalSliderAnimationBuilderState
         );
 }
 
+/// Состояние [SliderAnimationBuilder], реализующее движение слайдов при
+/// переключении. Для внутреннего пользования.
 abstract class _SliderAnimationBuilderState
     extends State<SliderAnimationBuilder> with SingleTickerProviderStateMixin {
+
+  /// Положение "центр". Для внутреннего пользования.
   static const _CENTER = Offset(0, 0);
 
+  /// Положение предыдущего слайда с точки зрения пользователя.
   final Offset prevPosition;
+
+  /// Положение следующего слайда с точки зрения пользователя.
   final Offset nextPosition;
 
+  /// Контроллер анимации.
+  ///
+  /// Обратите внимание, что при уничтожении [_SliderAnimationBuilderState]
+  /// [_controller] должен также уничтожаться:
+  ///
+  /// ```dart
+  /// @override
+  //  void dispose() {
+  //     _controller.dispose();
+  //     super.dispose();
+  //  }
+  /// ```
   late final AnimationController _controller;
+
+  /// Анимация приходящего слайда.
+  ///
+  /// Движение происходит от направления [widget.direction] к центру.
   late final Animation<Offset> _slideInAnimation;
+
+  /// Анимация уходящего слайда.
+  ///
+  /// Движение происходит от центра к противоположному [widget.direction]
+  /// направлению.
   late final Animation<Offset> _slideOutAnimation;
 
+  /// Базовый констркутор.
   _SliderAnimationBuilderState({
     required this.prevPosition,
     required this.nextPosition,
@@ -71,6 +118,10 @@ abstract class _SliderAnimationBuilderState
     _controller.forward();
   }
 
+  /// Инициализирует [_slideOutAnimation].
+  ///
+  /// [Animation] — базовая анимация, управляемая [_controller], искажённая
+  /// кривой.
   void _initSlideOutAnimation(CurvedAnimation animation) {
     _slideOutAnimation = Tween<Offset>(
       begin: _CENTER,
@@ -80,6 +131,10 @@ abstract class _SliderAnimationBuilderState
     ).animate(animation);
   }
 
+  /// Инициализирует [_slideInAnimation].
+  ///
+  /// [Animation] — базовая анимация, управляемая [_controller], искажённая
+  /// кривой.
   void _initSlideInAnimation(CurvedAnimation animation) {
     _slideInAnimation = Tween<Offset>(
       begin: widget.direction == SliderDirection.prev
@@ -89,6 +144,7 @@ abstract class _SliderAnimationBuilderState
     ).animate(animation);
   }
 
+  /// Инициализирует [_controller].
   void _initController() {
     _controller = AnimationController(
       vsync: this,

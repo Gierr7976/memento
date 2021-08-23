@@ -5,11 +5,18 @@ import 'package:memento_ui/src/basics/clickable/variants.dart';
 import 'package:memento_ui/src/basics/toggleable.dart';
 import 'package:memento_ui/src/tabler_icons.dart';
 
+/// Кнопка-переключатель.
 class MementoToggle extends Toggleable {
+  /// Заголовок кнопки.
   final String title;
+
+  /// Описание кнопки.
   final String? description;
+
+  /// Доступность кнопки для пользовательских взаимодействий.
   final bool enabled;
 
+  /// Базовый конструктор.
   MementoToggle({
     Key? key,
     required this.title,
@@ -30,7 +37,7 @@ class MementoToggle extends Toggleable {
         child: _content(context, state),
         enabled: enabled,
         color: state ? MementoColorTheme.of(context).dimmedOk : null,
-        onTap: () => tap(state, context),
+        onTap: () => toggle(context, state),
       );
 
   Padding _content(BuildContext context, bool state) => Padding(
