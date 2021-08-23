@@ -3,16 +3,33 @@ import 'package:memento_style/memento_style.dart';
 import 'package:memento_ui/src/basics/clickable/variants.dart';
 import 'package:memento_ui/src/tabler_icons.dart';
 
+/// Навигационная кнопка со стрелкой.
 class MementoNavigationButton extends StatelessWidget
     with MementoColorThemeUserMixin {
+  /// Заголовок кнопки.
   final String title;
+
+  /// Описание кнопки. Если равно [null], отражающие его виджеты внутри кнопки
+  /// не создаются.
   final String? description;
+
+  /// То, что произойдёт, когда пользователь коснётся кнопки.
   final GestureTapCallback? onTap;
+
+  /// Цвет заголовка и стрелки, по умолчанию — приглушённый цвет текста
+  /// темы.
   final Color? titleColor;
+
+  /// Цвет описания, по умолчанию — полузаглушённый цвет текста темы.
   final Color? descriptionColor;
+
+  /// Цвет подложки, по умолчанию — фоновый цвет темы.
   final Color? groundColor;
+
+  /// Доступность кнопки для пользовательских взаимодействий.
   final bool enabled;
 
+  /// Базовый конструктор.
   MementoNavigationButton({
     Key? key,
     required this.title,

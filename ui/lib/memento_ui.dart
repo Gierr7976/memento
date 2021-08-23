@@ -1,3 +1,4 @@
+/// Библиотека UI-виджетов для Memento.
 library memento_ui;
 
 export 'package:memento_ui/src/basics/clickable/clickable.dart';

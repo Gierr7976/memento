@@ -3,14 +3,31 @@ import 'package:memento_style/memento_style.dart';
 import 'package:memento_ui/src/basics/clickable/variants.dart';
 import 'package:memento_ui/src/misc/constants.dart';
 
+/// Круглая кнопка с иконкой.
 class MementoCircleButton extends StatelessWidget {
+  /// Иконка кнопки.
   final IconData icon;
+
+  /// Размер иконки:
+  ///
+  /// [true] — 24
+  ///
+  /// [false] — 32
   final bool small;
+
+  /// Доступность кнопки для пользовательских взаимодействий.
   final bool enabled;
+
+  /// Цвет иконки.
   final Color? color;
+
+  /// Цвет подложки, по умолчанию — фоновый цвет темы.
   final Color? groundColor;
+
+  /// То, что произойдёт, когда пользователь коснётся кнопки.
   final GestureTapCallback? onTap;
 
+  /// Базовый конструктор.
   const MementoCircleButton({
     Key? key,
     required this.icon,

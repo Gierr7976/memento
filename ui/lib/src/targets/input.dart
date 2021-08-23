@@ -7,18 +7,34 @@ import 'package:memento_ui/src/logic/input.dart';
 import 'package:memento_ui/src/misc/constants.dart';
 import 'package:memento_ui/src/tabler_icons.dart';
 
+/// Простое поле ввода.
 class MementoInput extends StatelessWidget {
+  /// Иконка, когда поле ввода не имеет фокуса и состояния проверки. Если равно
+  /// [null], иконка не отображается
   final IconData? standbyIcon;
+
+  /// Иконка, когда поле ввода не имеет фокуса и состояние проверки — ошибка.
+  /// По умолчанию — [TablerIcons.alert_triangle].
   final IconData errorIcon;
+
+  /// Иконка, когда поле ввода не имеет фокуса и состояние проверки — пройдено.
+  /// По умолчанию — [TablerIcons.circle_check].
   final IconData validIcon;
 
+  /// Метка поля ввода. Поясняет пользователю предназначение поля.
   final String caption;
+
+  /// Изначальный ввод.
   final String? initialData;
+
+  /// Функция-валидатор, которая будет вызываться для проверки корректности
+  /// пользовательского ввода.
   final bool Function(String)? validator;
 
   final FocusNode focusNode;
   final TextEditingController controller;
 
+  /// Базовый конструктор.
   MementoInput({
     Key? key,
     this.standbyIcon,
