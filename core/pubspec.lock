@@ -147,7 +147,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "26cb4a3c0a04134dd774aeaed30ca68968074848"
+      resolved-ref: "66f817fb1bf3c39d2ca663491a42bc94f244b681"
       url: "https://github.com/Gierr7976/glow"
     source: git
     version: "0.0.0"
